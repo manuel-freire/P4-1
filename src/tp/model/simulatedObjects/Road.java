@@ -5,7 +5,7 @@ import tp.model.simulatedObjects.Vehicle;
 
 public class Road {
 	ArrayList<Vehicle> listvehicles = new ArrayList<>();
-	int length, maxVel;
+	int length, maxVel, time;
 	String id;
 	Junction fin; // ini;
 	
@@ -17,12 +17,12 @@ public class Road {
 		listvehicles.remove(vehicles);
 	}
 	public void avanza() {
-		int factorReduccion = 0;
-		double velocidadBase = Math.min(maxVel, Math.floorDiv(maxVel,Math.max(listvehicles.size(), 1)));
+		int factorReduction = 0;
+		double baseVel = Math.min(maxVel, Math.floorDiv(maxVel,Math.max(listvehicles.size(), 1)));
 		for(int i = listvehicles.size()-1; i >= 0 ; i-- ) {
-			listvehicles.get(i).setActualVel((int)velocidadBase/factorReduccion);
+			listvehicles.get(i).setActualVel((int)baseVel/factorReduction);
 			listvehicles.get(i).advance();
-			factorReduccion += (listvehicles.get(i).isOutOfOrder()) ? 1 : 0;
+			factorReduction += (listvehicles.get(i).isOutOfOrder()) ? 1 : 0;
 		}
 	}
 	public String getID() {
@@ -38,7 +38,14 @@ public class Road {
 		this.length = length;
 	}
 	public String generateReport() {
-		
+		String state = new String();
+		for(Vehicle v : listvehicles)
+			state += "(" + v.getID() + "," + v.getLocation() + ")";
+		return "[road_report]\n id = " + id + "\n time = " + time + "\n state" + state;
+
+		/*
+		 * [road_report] id = r3 time = 4 state = (v2,80),(v3,67) 
+		 */
 	}
 	public Junction getEndJunction() {
 		return fin;

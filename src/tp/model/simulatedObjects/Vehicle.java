@@ -47,5 +47,8 @@ public class Vehicle {
 	public String generateReport() {
 		return "[Vehicle report]\n id = " + id + "\n time = " + time + "\n kilometrage = " + kilometrage + "\n (" + actualRoad.getID() + "," + location + ")";
 	}
+	public int getLocation() {
+		return location;
+	}
 
 }
