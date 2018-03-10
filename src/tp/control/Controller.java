@@ -1,4 +1,4 @@
-package control;
+package tp.control;
 
 public class Controller {
 

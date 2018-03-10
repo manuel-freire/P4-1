@@ -1,4 +1,4 @@
-package model.advancedObjects;
+package tp.model.advancedObjects;
 
 public class Car {
 
