@@ -1,18 +1,18 @@
 package tp.model.simulatedObjects;
 
 import java.util.ArrayList;
-import tp.model.simulatedObjects.Vehicles;
+import tp.model.simulatedObjects.Vehicle;
 
-public class Roads {
-	ArrayList<Vehicles> listvehicles = new ArrayList<>();
+public class Road {
+	ArrayList<Vehicle> listvehicles = new ArrayList<>();
 	int length, maxVel;
-	String ID;
-	Junctions fin; // ini;
+	String id;
+	Junction fin; // ini;
 	
-	public void entravehicles(Vehicles vehicles) {
+	public void entersVehicle(Vehicle vehicles) {
 		listvehicles.add(vehicles);
 	}
-	public void salevehicles(Vehicles vehicles) {
+	public void exitsVehicle(Vehicle vehicles) {
 		fin.enterVehicle(vehicles);
 		listvehicles.remove(vehicles);
 	}
@@ -20,16 +20,16 @@ public class Roads {
 		int factorReduccion = 0;
 		double velocidadBase = Math.min(maxVel, Math.floorDiv(maxVel,Math.max(listvehicles.size(), 1)));
 		for(int i = listvehicles.size()-1; i >= 0 ; i-- ) {
-			listvehicles.get(i).setActualVelocity(velocidadBase/factorReduccion);
+			listvehicles.get(i).setActualVel((int)velocidadBase/factorReduccion);
 			listvehicles.get(i).advance();
 			factorReduccion += (listvehicles.get(i).isOutOfOrder()) ? 1 : 0;
 		}
 	}
 	public String getID() {
-		return ID;
+		return id;
 	}
-	public void setID(String iD) {
-		ID = iD;
+	public void setID(String id) {
+		this.id = id;
 	}
 	public int getLength() {
 		return length;
@@ -37,8 +37,10 @@ public class Roads {
 	public void setLength(int length) {
 		this.length = length;
 	}
-	public void generateReport() {
-		// TODO Auto-generated method stub
+	public String generateReport() {
 		
+	}
+	public Junction getEndJunction() {
+		return fin;
 	}
 }

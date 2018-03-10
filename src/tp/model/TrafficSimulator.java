@@ -1,5 +1,8 @@
 package tp.model;
 
-public class TrafficSimulator {
+import tp.model.simulatedObjects.Junction;
+import tp.model.simulatedObjects.Road;
 
+public class TrafficSimulator {
+	
 }
