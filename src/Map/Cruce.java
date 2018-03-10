@@ -1,6 +1,8 @@
-package tp;
+package Map;
 
-import java.util.ArrayList;	
+import java.util.ArrayList;
+
+import Vehicles.Vehiculo;	
 	
 public class Cruce {
 	ArrayList<Vehiculo> listaVehiculos = new ArrayList<>();
@@ -20,5 +22,9 @@ public class Cruce {
 			Vehiculo v = listaVehiculos.get(0);
 			v.getSigCruce().entraVehiculo(v);
 		}
+	}
+	public void generaInforme() {
+		// TODO Auto-generated method stub
+		
 	}
 }

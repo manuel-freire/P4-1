@@ -1,6 +1,8 @@
-package tp;
+package Map;
 
 import java.util.ArrayList;
+
+import Vehicles.Vehiculo;
 
 public class Carretera {	
 	ArrayList<Vehiculo> listaVehiculos = new ArrayList<>();
@@ -35,5 +37,9 @@ public class Carretera {
 	}
 	public void setLongitud(int longitud) {
 		this.longitud = longitud;
+	}
+	public void generaInforme() {
+		// TODO Auto-generated method stub
+		
 	}
 }
