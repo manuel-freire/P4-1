@@ -1,8 +1,6 @@
-package Map;
+package Simulator;
 
-import java.util.ArrayList;
-
-import Vehicles.Vehiculo;	
+import java.util.ArrayList;	
 	
 public class Cruce {
 	ArrayList<Vehiculo> listaVehiculos = new ArrayList<>();

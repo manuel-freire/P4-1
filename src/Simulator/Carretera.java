@@ -1,8 +1,6 @@
-package Map;
+package Simulator;
 
 import java.util.ArrayList;
-
-import Vehicles.Vehiculo;
 
 public class Carretera {	
 	ArrayList<Vehiculo> listaVehiculos = new ArrayList<>();

@@ -14,10 +14,17 @@ public class Simulador {
 	
 	class Evento{
 		class Tiempo{
+			int t;
+			
+			public Tiempo() {
+				
+			}
+		}
+		Tiempo tiempo;
+		
+		public Evento() {
 			
 		}
-		
-		Tiempo tiempo;
 	}
 
 	public void ejecuta() {
