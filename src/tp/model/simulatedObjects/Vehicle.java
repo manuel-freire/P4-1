@@ -3,12 +3,27 @@ package tp.model.simulatedObjects;
 import java.util.List;
 
 public class Vehicle {
-	private int actualVel, velMax, location, time, kilometrage;
+	private int actualVel, maxVel, location, time, kilometrage,maxBreakTime;
 	private List<Road> itinerary;
 	private Road actualRoad;
 	private String id;
 	private int brokenTime;
 	
+	public Road getActualRoad() {
+		return actualRoad;
+	}
+	public void setActualRoad(Road actualRoad) {
+		this.actualRoad = actualRoad;
+	}
+	public void setLocation(int location) {
+		this.location = location;
+	}
+	public Vehicle(int maxVel, int maxBreakTime, List<Road> itinerary, String id) {
+		this.maxVel = maxVel;
+		this.itinerary = itinerary;
+		this.maxBreakTime = maxBreakTime;
+		this.id = id;
+	}
 	public void advance() {
 		if(brokenTime <= 0) {
 			location += actualVel;
@@ -33,11 +48,9 @@ public class Vehicle {
 	public boolean isOutOfOrder() {
 		return brokenTime>0;
 	}
-
 	public String getID() {
 		return id;
 	}
-	
 	public void advanceToNextRoad() {
 		itinerary.remove(0);
 		Road r = itinerary.get(0);
@@ -50,5 +63,10 @@ public class Vehicle {
 	public int getLocation() {
 		return location;
 	}
-
+	public int getMaxBreakTime() {
+		return maxBreakTime;
+	}
+	public int getMaxVel() {
+		return maxVel;
+	}
 }
