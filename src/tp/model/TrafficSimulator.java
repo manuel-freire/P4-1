@@ -15,13 +15,22 @@ public class TrafficSimulator {
 	public void execute() {
 		int limiteTiempo = this.contadorTiempo + pasosSimulacion - 1; 
 		while (this.contadorTiempo <= limiteTiempo) { 
-			// 1. ejecutar los eventos correspondientes a ese tiempo 
+			for(Event e: events) {
+				if(e.getTime() <= contadorTiempo)
+					e.execute();
+			}
 			for(Road r : roads)
 				r.advance();
 			for(Junction j : junctions)
 				j.advance();
 			contadorTiempo++; 
 			// 5. esciribir un informe en OutputStream en caso de que no sea null 
+			for(Road r : roads)
+				r.generateReport();
+			for(Junction j : junctions)
+				j.generateReport();
+			for(Vehicle v : vehicles)
+				v.generateReport();
 		} 
 	}
 }
