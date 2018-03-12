@@ -16,7 +16,7 @@ public class Road {
 		fin.enterVehicle(vehicles);
 		listvehicles.remove(vehicles);
 	}
-	public void advance() {
+	public void avanza() {
 		int factorReduction = 0;
 		double baseVel = Math.min(maxVel, Math.floorDiv(maxVel,Math.max(listvehicles.size(), 1)));
 		for(int i = listvehicles.size()-1; i >= 0 ; i-- ) {
