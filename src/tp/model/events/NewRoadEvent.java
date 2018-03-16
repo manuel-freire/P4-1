@@ -1,4 +1,4 @@
-package tp.control.events;
+package tp.model.events;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,7 +7,7 @@ import tp.model.TrafficSimulator;
 
 public class NewRoadEvent extends Event{
 	String src, dest, id;
-	int max_speed, length, time;
+	int max_speed, length;
 	public NewRoadEvent() {
 		eventId="new_road";
 	}
@@ -30,7 +30,7 @@ public class NewRoadEvent extends Event{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		time=Integer.parseInt(arr[2]);
+		setTime(Integer.parseInt(arr[2]));
 		try {
 			arr=reader.readLine().split(" ");
 		} catch (IOException e) {
@@ -69,6 +69,6 @@ public class NewRoadEvent extends Event{
 		System.out.print("Id, "); System.out.println(id);
 		System.out.print("Max_speed, "); System.out.println(max_speed);
 		System.out.print("Length, "); System.out.println(length);
-		System.out.print("Time, "); System.out.println(time);
+		System.out.print("Time, "); System.out.println(getTime());
 	}
 }

@@ -1,5 +1,6 @@
-package tp.control.events;
+package tp.model.events;
 import java.io.BufferedReader;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,11 +10,11 @@ import tp.model.simulatedObjects.Road;
 import tp.model.simulatedObjects.Vehicle;
 public class NewVehicleEvent extends Event{
 	String id;
-	private int max_speed, time;
-	private List<Road> it;
+	private int max_speed;
+	private List<String> it;
 	public NewVehicleEvent() {
 		eventId="new_vehicle";
-		it=new List<Road>();
+		it=new ArrayList<String>();
 	}
 	public void execute(TrafficSimulator sim) {
 		Vehicle v = new Vehicle();
@@ -33,7 +34,7 @@ public class NewVehicleEvent extends Event{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		time=Integer.parseInt(arr[2]);
+		setTime(Integer.parseInt(arr[2]));
 		try {
 			arr=reader.readLine().split(" ");
 		} catch (IOException e) {
@@ -59,7 +60,7 @@ public class NewVehicleEvent extends Event{
 	public void print() {  //Only for testing purposes
 		System.out.println(eventId);
 		System.out.print("Max_speed, "); System.out.println(max_speed);
-		System.out.print("Time, "); System.out.println(time);
+		System.out.print("Time, "); System.out.println(getTime());
 		System.out.print("Id, "); System.out.println(id);
 		for (int i=0;i<it.size(); i++) {
 			System.out.println(it.get(i));

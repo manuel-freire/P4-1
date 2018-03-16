@@ -1,4 +1,4 @@
-package tp.control.events;
+package tp.model.events;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -6,7 +6,6 @@ import java.io.IOException;
 import tp.model.TrafficSimulator;
 
 public class NewJunctionEvent extends Event {
-	private int time;
 	private String junctionId;
 	public NewJunctionEvent() {
 		eventId="new_junction";
@@ -29,7 +28,7 @@ public class NewJunctionEvent extends Event {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		time=Integer.parseInt(arr[2]);
+		setTime(Integer.parseInt(arr[2]));
 		try {
 			arr=reader.readLine().split(" ");
 		} catch (IOException e) {
@@ -38,7 +37,7 @@ public class NewJunctionEvent extends Event {
 		junctionId=arr[2];
 	}
 	public void print() {  //Only for testing purposes
-		System.out.print("Time, "); System.out.println(time);
+		System.out.print("Time, "); System.out.println(getTime());
 		System.out.print("JunctionID, "); System.out.println(junctionId);
 	}
 }

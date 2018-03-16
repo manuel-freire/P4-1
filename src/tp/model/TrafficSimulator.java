@@ -17,7 +17,7 @@ public class TrafficSimulator {
 		while (this.contadorTiempo <= limiteTiempo) { 
 			for(Event e: events) {
 				if(e.getTime() <= contadorTiempo)
-					e.execute();
+					e.execute(this);
 			}
 			for(Road r : roads)
 				r.advance();
@@ -26,11 +26,16 @@ public class TrafficSimulator {
 			contadorTiempo++; 
 			// 5. esciribir un informe en OutputStream en caso de que no sea null 
 			for(Road r : roads)
-				r.generateReport();
+				r.generateReport(contadorTiempo);
 			for(Junction j : junctions)
-				j.generateReport();
+				j.generateReport(contadorTiempo);
 			for(Vehicle v : vehicles)
-				v.generateReport();
+				v.generateReport(contadorTiempo);
 		} 
+	}
+
+	public void addVehicle(Vehicle v) {
+		// TODO Auto-generated method stub
+		
 	}
 }

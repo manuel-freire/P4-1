@@ -5,7 +5,7 @@ import tp.model.simulatedObjects.Vehicle;
 
 public class Road {
 	ArrayList<Vehicle> listvehicles = new ArrayList<>();
-	int length, maxVel, time;
+	int length, maxVel;
 	String id;
 	Junction fin; // ini;
 	
@@ -37,7 +37,7 @@ public class Road {
 	public void setLength(int length) {
 		this.length = length;
 	}
-	public String generateReport() {
+	public String generateReport(int time) {
 		String state = new String();
 		for(Vehicle v : listvehicles)
 			state += "(" + v.getID() + "," + v.getLocation() + ")";

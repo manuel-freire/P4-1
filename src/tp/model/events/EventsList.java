@@ -1,4 +1,4 @@
-package tp.control.events;
+package tp.model.events;
 
 import java.util.ArrayList;
 

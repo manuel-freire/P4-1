@@ -3,7 +3,7 @@ package tp.model.simulatedObjects;
 import java.util.List;
 
 public class Vehicle {
-	private int actualVel, maxVel, location, time, kilometrage,maxBreakTime;
+	private int actualVel, maxVel, location, kilometrage,maxBreakTime;
 	private List<Road> itinerary;
 	private Road actualRoad;
 	private String id;
@@ -57,7 +57,7 @@ public class Vehicle {
 		actualRoad = r;
 		r.entersVehicle(this);
 	}
-	public String generateReport() {
+	public String generateReport(int time) {
 		return "[Vehicle report]\n id = " + id + "\n time = " + time + "\n kilometrage = " + kilometrage + "\n (" + actualRoad.getID() + "," + location + ")";
 	}
 	public int getLocation() {

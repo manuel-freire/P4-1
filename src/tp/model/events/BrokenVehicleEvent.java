@@ -1,4 +1,4 @@
-package tp.control.events;
+package tp.model.events;
 
 import java.awt.List;
 import java.io.BufferedReader;
