@@ -2,9 +2,8 @@ package tp.control;
 
 import tp.model.events.Event;
 import tp.model.events.EventParser;
-import tp.model.events.EventsList;
 import java.io.*;
-import java.util.IllegalFormatException;
+import java.util.ArrayList;
 
 public class EventBuilder {
 	EventParser parser = new EventParser();
@@ -21,35 +20,27 @@ public class EventBuilder {
 		}    
          this.b=new BufferedReader(fr);  
 	}
-	public Event Builder() throws IllegalArgumentException  {
-		String dataId = null;
-	         try {
-				dataId=b.readLine();
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
-	         Event finalEvent = null;
-	         for (Event e : parser.parser) {
-	        	 finalEvent=e.parser(dataId);
-		         if (finalEvent!=null) {
-		        	 break;
+	public ArrayList<Event> Builder() throws IllegalArgumentException  {
+		String dataID = null;
+		ArrayList<Event> eventList = new ArrayList<Event>();
+		try {
+			while((dataID = b.readLine()) != null){
+		         Event event = null;
+		         for (Event e : parser.parser) {
+		        	 event=e.parser(dataID);
+			         if (event!=null) {
+			        	 break;
+			         }
 		         }
-	         }
-	         if (finalEvent!=null) {
-	        	 finalEvent.builder(b);
-	         } else {
-	        	 throw new IllegalArgumentException();
-	         }
-	    	return finalEvent;
+		         if (event!=null)
+		        	 event.builder(b);
+		         else
+		        	 throw new IllegalArgumentException();
+		         eventList.add(event);
+		     }
+		 } catch (IOException e1) {
+			e1.printStackTrace();
+		 }
+	    return eventList;
 	}
-	public EventsList finalBuilder() {
-		EventsList t= new EventsList();
-		t.EventsList.add(Builder());
-		t.EventsList.add(Builder());
-		t.EventsList.add(Builder());
-		t.EventsList.add(Builder());
-		t.EventsList.add(Builder());
-		return t;
-	}
-
 }
