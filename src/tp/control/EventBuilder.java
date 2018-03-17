@@ -14,11 +14,11 @@ public class EventBuilder {
 	BufferedReader b;
 	String fileName;
 	
-	public EventBuilder(String filename_) {
-		this.fileName=filename_;
+	public EventBuilder(String filename) {
+		this.fileName=filename;
 		FileReader fr = null;
 		try {
-			fr = new FileReader(filename_);
+			fr = new FileReader(filename);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}    
@@ -28,22 +28,22 @@ public class EventBuilder {
 		String dataID = null;
 		ArrayList<Event> eventList = new ArrayList<Event>();
 		try {
-			while((dataID = b.readLine()) != null){
+			while((dataID = b.readLine()) != null){ // Reads a line and stores it in dataID, if it can't read any longer exits the loop
 		         Event event = null;
-		         for (Event e : parser) {
+		         for (Event e : parser) { // Tries to parse the event
 		        	 event=e.parser(dataID);
 			         if (event!=null) {
 			        	 break;
 			         }
 		         }
-		         if (event!=null)
-		        	 event.builder(b);
+		         if (event!=null) // Checks that the dataID was valid
+		        	 event.builder(b); // Calls the event builder to read the rest of the event
 		         else
 		        	 throw new IllegalArgumentException();
 		         eventList.add(event);
 		     }
-		 } catch (IOException e1) {
-			e1.printStackTrace();
+		 } catch (IOException e) {
+			e.printStackTrace();
 		 }
 	    return eventList;
 	}
