@@ -27,16 +27,12 @@ public class NewJunctionEvent extends Event {
 		String[]arr = null;
 		try {
 			arr=reader.readLine().split(" ");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		setTime(Integer.parseInt(arr[2]));
-		try {
+			setTime(Integer.parseInt(arr[2]));
 			arr=reader.readLine().split(" ");
+			junctionId=arr[2];
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		junctionId=arr[2];
 	}
 	public void print() {  //Only for testing purposes
 		System.out.print("Time, "); System.out.println(getTime());

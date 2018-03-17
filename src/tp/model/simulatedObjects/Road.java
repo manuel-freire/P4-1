@@ -82,13 +82,12 @@ public class Road {
 	 * @return report of the status of the road
 	 */
 	public String generateReport(int time) {
+		/*
+		 * [road_report] id = r3 time = 4 state = (v2,80),(v3,67) 
+		 */
 		String state = new String();
 		for(Vehicle v : listvehicles)
 			state += "(" + v.getID() + "," + v.getLocation() + ")";
 		return "[road_report]\n id = " + id + "\n time = " + time + "\n state" + state;
-
-		/*
-		 * [road_report] id = r3 time = 4 state = (v2,80),(v3,67) 
-		 */
 	}
 }

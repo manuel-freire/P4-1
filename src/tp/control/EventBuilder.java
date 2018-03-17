@@ -1,12 +1,16 @@
 package tp.control;
 
+import tp.model.events.BrokenVehicleEvent;
 import tp.model.events.Event;
-import tp.model.events.EventParser;
+import tp.model.events.NewJunctionEvent;
+import tp.model.events.NewRoadEvent;
+import tp.model.events.NewVehicleEvent;
+
 import java.io.*;
 import java.util.ArrayList;
 
 public class EventBuilder {
-	EventParser parser = new EventParser();
+	Event[] parser= {new NewJunctionEvent(), new NewRoadEvent(), new NewVehicleEvent(), new BrokenVehicleEvent()};
 	BufferedReader b;
 	String fileName;
 	
@@ -26,7 +30,7 @@ public class EventBuilder {
 		try {
 			while((dataID = b.readLine()) != null){
 		         Event event = null;
-		         for (Event e : parser.parser) {
+		         for (Event e : parser) {
 		        	 event=e.parser(dataID);
 			         if (event!=null) {
 			        	 break;

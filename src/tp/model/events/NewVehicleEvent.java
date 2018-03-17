@@ -32,30 +32,18 @@ public class NewVehicleEvent extends Event{
 		String[]arr = null;
 		try {
 			arr=reader.readLine().split(" ");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		setTime(Integer.parseInt(arr[2]));
-		try {
+			setTime(Integer.parseInt(arr[2]));
 			arr=reader.readLine().split(" ");
-		} catch (IOException e) {
+			id=arr[2];
+			arr=reader.readLine().split(" ");
+		   	max_speed=Integer.parseInt(arr[2]);
+			arr=reader.readLine().split(" ");
+			arr=arr[2].split(",");
+			for (int i=0; i<arr.length; i++)
+				it.add(arr[i]);
+		}catch(IOException e) {
+			System.out.println(e.getMessage());
 			e.printStackTrace();
-		} 
-		id=arr[2];
-	    try {
-		 arr=reader.readLine().split(" ");
-	    } catch (IOException e) {
-		e.printStackTrace();
-	    }
-	   	max_speed=Integer.parseInt(arr[2]);
-		try {
-		arr=reader.readLine().split(" ");
-		arr=arr[2].split(",");
-		 } catch (IOException e) {
-			 e.printStackTrace();
-		 }
-		for (int i=0; i<arr.length; i++) {
-			it.add(arr[i]);
 		}
 	}
 	public void print() {  //Only for testing purposes

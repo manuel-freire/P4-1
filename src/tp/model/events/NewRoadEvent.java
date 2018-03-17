@@ -28,40 +28,20 @@ public class NewRoadEvent extends Event{
 		String[]arr = null;
 		try {
 			arr=reader.readLine().split(" ");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		setTime(Integer.parseInt(arr[2]));
-		try {
+			setTime(Integer.parseInt(arr[2]));
 			arr=reader.readLine().split(" ");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		id=arr[2];
-		try {
+			id=arr[2];
 			arr=reader.readLine().split(" ");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		src=arr[2];
-		try {
+			src=arr[2];
 			arr=reader.readLine().split(" ");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		dest=arr[2];
-		try {
+			dest=arr[2];
 			arr=reader.readLine().split(" ");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		max_speed=Integer.parseInt(arr[2]);
-		try {
+			max_speed=Integer.parseInt(arr[2]);
 			arr=reader.readLine().split(" ");
+			length=Integer.parseInt(arr[2]);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		length=Integer.parseInt(arr[2]);
 	}
 	public void print() {//Only for testing purposes
 		System.out.println(eventId);
