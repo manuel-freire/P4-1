@@ -23,11 +23,9 @@ public class Main {
 	private static String _outFile = null;
 
 	private static void parseArgs(String[] args) {
-
 		// define the valid command line options
 		//
 		Options cmdLineOptions = buildOptions();
-
 		// parse the command line as provided in args
 		//
 		CommandLineParser parser = new DefaultParser();

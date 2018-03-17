@@ -7,5 +7,6 @@
 	<classpathentry kind="lib" path="D:/OtherProgramFiles/JavaPackages/commons-cli-1.4-bin/commons-cli-1.4/commons-cli-1.4-sources.jar"/>
 	<classpathentry kind="lib" path="D:/OtherProgramFiles/JavaPackages/commons-cli-1.4-bin/commons-cli-1.4/commons-cli-1.4-tests.jar"/>
 	<classpathentry kind="lib" path="D:/OtherProgramFiles/JavaPackages/commons-cli-1.4-bin/commons-cli-1.4/commons-cli-1.4-test-sources.jar"/>
+	<classpathentry kind="lib" path="D:/Documents/Code/Java jar/junit-4.12.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
