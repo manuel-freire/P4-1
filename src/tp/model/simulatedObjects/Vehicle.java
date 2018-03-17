@@ -1,6 +1,7 @@
 package tp.model.simulatedObjects;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import tp.model.TrafficSimulator;
 
@@ -120,7 +121,11 @@ public class Vehicle {
 			location += actualVel;
 			if(location>actualRoad.getLength())
 				location = actualRoad.getLength();
-			sim.getJunction(actualRoad.getEndJunction()).enterVehicle(this,actualRoad.getID());
+			try {
+				sim.getJunction(actualRoad.getEndJunction()).enterVehicle(this,actualRoad.getID());
+			}catch(NoSuchElementException e) {
+				System.out.println(e.getMessage());
+			}
 			actualRoad.exitsVehicle(this);
 		}else
 			brokenTime--;
