@@ -68,7 +68,7 @@ public class Junction {
 	 * Generates a report of the status of the road.
 	 * @param time current time of the simulation.
 	 */
-	public void generateReport(int time) {
+	public String generateReport(int time) {
 		/*
 		 * [junction_report] 
 		 * id = j2 
@@ -89,7 +89,7 @@ public class Junction {
 				queuesString += ")";
 			it.next();
 		}
-		System.out.println("[junction_report]\nid = " + id + "\n time = " + time + "\n queues = " + queuesString);
+		return "[junction_report]\nid = " + id + "\n time = " + time + "\n queues = " + queuesString;
 	}
 
 }

@@ -1,5 +1,7 @@
 package tp.model;
 
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
@@ -11,35 +13,37 @@ public class TrafficSimulator {
 	private ArrayList<Road> roads;
 	private ArrayList<Vehicle> vehicles;
 	private ArrayList<Event> events;
-	int contadorTiempo, pasosSimulacion;
+	int actualTick, totalTicks;
 	
-	public TrafficSimulator(int pasosSimulacion) {
-		contadorTiempo = 0;
-		this.pasosSimulacion = pasosSimulacion;
+	public TrafficSimulator(int ticks) {
+		actualTick = 0;
+		this.totalTicks = ticks;
 	}
 	/**
 	 * Starts the simulation.
 	 */
-	public void execute() {
-		int limiteTiempo = this.contadorTiempo + pasosSimulacion - 1; 
-		while (this.contadorTiempo <= limiteTiempo) { 
+	public void execute(OutputStream ostream) {
+		int limiteTiempo = this.actualTick + totalTicks - 1; 
+		while (this.actualTick <= limiteTiempo) { 
 			for(Event e: events)
-				if(e.getTime() <= contadorTiempo)
+				if(e.getTime() <= actualTick)
 					e.execute(this);
 			for(Road r : roads)
 				r.advance(this);
 			for(Junction j : junctions)
 				j.advance(this);
-			contadorTiempo++; 
-			
+			actualTick++; 
+			try {
 			for(Road r : roads)
-				r.generateReport(contadorTiempo);
+				ostream.write(r.generateReport(actualTick).getBytes());
 			for(Junction j : junctions)
-				j.generateReport(contadorTiempo);
+				ostream.write(j.generateReport(actualTick).getBytes());
 			for(Vehicle v : vehicles)
-				v.generateReport(contadorTiempo);
-			
-			contadorTiempo++;
+				ostream.write(v.generateReport(actualTick).getBytes());
+			}catch(IOException e) {
+				System.out.println(e.getMessage());
+			}
+			actualTick++;
 		} 
 	}
 	/**
