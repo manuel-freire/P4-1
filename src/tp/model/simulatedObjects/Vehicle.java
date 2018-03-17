@@ -120,7 +120,7 @@ public class Vehicle {
 			location += actualVel;
 			if(location>actualRoad.getLength())
 				location = actualRoad.getLength();
-			sim.getJunction(actualRoad.getEndJunction()).enterVehicle(this,actualRoad);
+			sim.getJunction(actualRoad.getEndJunction()).enterVehicle(this,actualRoad.getID());
 			actualRoad.exitsVehicle(this);
 		}else
 			brokenTime--;

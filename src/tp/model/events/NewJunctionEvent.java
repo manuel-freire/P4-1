@@ -2,8 +2,10 @@ package tp.model.events;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import tp.model.TrafficSimulator;
+import tp.model.simulatedObjects.Junction;
 
 public class NewJunctionEvent extends Event {
 	private String junctionId;

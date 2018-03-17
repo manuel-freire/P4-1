@@ -14,7 +14,7 @@ public class NewRoadEvent extends Event{
 	}
 	@Override
 	public void execute(TrafficSimulator sim) {
-		Road r = new Road();
+		Road r = new Road(id, src, dest, max_speed, length);
 		sim.addRoad(r);
 	}
 	public Event parser(String id){

@@ -21,7 +21,7 @@ public class TrafficSimulator {
 					e.execute(this);
 			}
 			for(Road r : roads)
-				r.advance();
+				r.advance(this);
 			for(Junction j : junctions)
 				j.advance(this);
 			contadorTiempo++; 
@@ -35,15 +35,10 @@ public class TrafficSimulator {
 		} 
 	}
 
-	public void addVehicle(Vehicle v) {
-		// TODO Auto-generated method stub
-		
-	}
-
 	public Road getRoad(String road_id, String end_id) {
 		Road road = null;
 		for(Road r: roads)
-			if(r.getID()==road_id&&r.getEndJunction().getID()==end_id)
+			if(r.getID()==road_id&&getJunction(r.getEndJunction()).getID()==end_id)
 				road = r;
 		if(road == null)
 			throw new NoSuchElementException("The junction does not exist.");
@@ -60,5 +55,19 @@ public class TrafficSimulator {
 			throw new NoSuchElementException("The junction does not exist.");
 		else
 			return jun;
+	}
+
+	public void addRoad(Road r) {
+		// TODO Auto-generated method stub
+		
+	}
+	public void addVehicle(Vehicle v) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void addJunction(Junction j) {
+		// TODO Auto-generated method stub
+		
 	}
 }
