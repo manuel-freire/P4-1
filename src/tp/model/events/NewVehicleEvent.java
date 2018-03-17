@@ -14,7 +14,7 @@ public class NewVehicleEvent extends Event{
 	private List<String> it;
 	
 	public NewVehicleEvent() {
-		eventId="new_vehicle";
+		eventId="[new_vehicle]";
 		it=new ArrayList<String>();
 	}
 	public void execute(TrafficSimulator sim) {

@@ -1,7 +1,7 @@
 package tp.model;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
@@ -22,7 +22,7 @@ public class TrafficSimulator {
 	/**
 	 * Starts the simulation.
 	 */
-	public void execute(OutputStream ostream) {
+	public void execute(FileOutputStream ostream) {
 		int limiteTiempo = this.actualTick + totalTicks - 1; 
 		while (this.actualTick <= limiteTiempo) { 
 			for(Event e: events)

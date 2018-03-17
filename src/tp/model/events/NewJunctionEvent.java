@@ -10,7 +10,7 @@ import tp.model.simulatedObjects.Junction;
 public class NewJunctionEvent extends Event {
 	private String junctionId;
 	public NewJunctionEvent() {
-		eventId="new_junction";
+		eventId="[new_junction]";
 	}
 	public Event parser(String id){
 		if (eventId.equals(id)) {

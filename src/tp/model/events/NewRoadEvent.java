@@ -10,7 +10,7 @@ public class NewRoadEvent extends Event{
 	String src, dest, id;
 	int max_speed, length;
 	public NewRoadEvent() {
-		eventId="new_road";
+		eventId="[new_road]";
 	}
 	@Override
 	public void execute(TrafficSimulator sim) {
