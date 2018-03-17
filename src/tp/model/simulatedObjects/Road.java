@@ -1,30 +1,39 @@
 package tp.model.simulatedObjects;
 
 import java.util.ArrayList;
+
+import tp.model.TrafficSimulator;
 import tp.model.simulatedObjects.Vehicle;
 
 public class Road {
 	private ArrayList<Vehicle> listvehicles = new ArrayList<>();
-	private int length, maxVel;
+	private int length, max_speed;
 	private String id;
-	private Junction end;
+	private String dest, src;
 	
 	/**
 	 * Class constructor.
 	 */
-	public Road(String id, Junction fin, int maxVel, int length) {
+	public Road(String id, String src, String dest, int max_speed, int length) {
 		this.id = id;
 		this.length = length;
-		this.end = fin;
-		this.maxVel = maxVel;
+		this.dest = dest;
+		this.max_speed = max_speed;
 	}
 	
 	/**
 	 * Returns the junction at the end of the road.
 	 * @return
 	 */
-	public Junction getEndJunction() {
-		return end;
+	public String getEndJunction() {
+		return dest;
+	}
+	/**
+	 * Returns the junction at the source of the road.
+	 * @return source junction
+	 */
+	public String getSourceJunction() {
+		return src;
 	}
 	/**
 	 * Returns the identification of the road.
@@ -58,12 +67,12 @@ public class Road {
 	/**
 	 * Updates the velocity of every vehicle in it and calls their advance method.
 	 */
-	public void advance() {
+	public void advance(TrafficSimulator sim) {
 		int factorReduction = 0;
-		double baseVel = Math.min(maxVel, Math.floorDiv(maxVel,Math.max(listvehicles.size(), 1)));
+		double baseVel = Math.min(max_speed, Math.floorDiv(max_speed,Math.max(listvehicles.size(), 1)));
 		for(int i = listvehicles.size()-1; i >= 0 ; i-- ) {
 			listvehicles.get(i).setActualVel((int)baseVel/factorReduction);
-			listvehicles.get(i).advance();
+			listvehicles.get(i).advance(sim);
 			factorReduction += (listvehicles.get(i).isOutOfOrder()) ? 1 : 0;
 		}
 	}

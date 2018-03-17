@@ -1,6 +1,7 @@
 package tp.model;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import tp.model.simulatedObjects.*;
 import tp.model.events.Event;
@@ -44,6 +45,20 @@ public class TrafficSimulator {
 		for(Road r: roads)
 			if(r.getID()==road_id&&r.getEndJunction().getID()==end_id)
 				road = r;
-		return road;
+		if(road == null)
+			throw new NoSuchElementException("The junction does not exist.");
+		else
+			return road;
+	}
+
+	public Junction getJunction(String id) throws NoSuchElementException {
+		Junction jun = null;
+		for(Junction j : junctions)
+			if(j.getID() == id)
+				jun = j;
+		if(jun == null)
+			throw new NoSuchElementException("The junction does not exist.");
+		else
+			return jun;
 	}
 }

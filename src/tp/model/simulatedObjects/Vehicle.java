@@ -115,12 +115,12 @@ public class Vehicle {
 	/**
 	 * Updates the vehicle's position in the road. If it has reached the end of the road it enters the junction and exits from the road.
 	 */
-	public void advance() {
+	public void advance(TrafficSimulator sim) {
 		if(brokenTime <= 0) {
 			location += actualVel;
 			if(location>actualRoad.getLength())
 				location = actualRoad.getLength();
-			actualRoad.getEndJunction().enterVehicle(this,actualRoad);
+			sim.getJunction(actualRoad.getEndJunction()).enterVehicle(this,actualRoad);
 			actualRoad.exitsVehicle(this);
 		}else
 			brokenTime--;

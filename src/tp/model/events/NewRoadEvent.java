@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 
 import tp.model.TrafficSimulator;
+import tp.model.simulatedObjects.Road;
 
 public class NewRoadEvent extends Event{
 	String src, dest, id;
