@@ -4,18 +4,60 @@ import java.util.ArrayList;
 import tp.model.simulatedObjects.Vehicle;
 
 public class Road {
-	ArrayList<Vehicle> listvehicles = new ArrayList<>();
-	int length, maxVel;
-	String id;
-	Junction fin; // ini;
+	private ArrayList<Vehicle> listvehicles = new ArrayList<>();
+	private int length, maxVel;
+	private String id;
+	private Junction end;
 	
-	public void entersVehicle(Vehicle vehicles) {
-		listvehicles.add(vehicles);
+	/**
+	 * Class constructor.
+	 */
+	public Road(String id, Junction fin, int maxVel, int length) {
+		this.id = id;
+		this.length = length;
+		this.end = fin;
+		this.maxVel = maxVel;
 	}
-	public void exitsVehicle(Vehicle vehicles) {
-		fin.enterVehicle(vehicles);
-		listvehicles.remove(vehicles);
+	
+	/**
+	 * Returns the junction at the end of the road.
+	 * @return
+	 */
+	public Junction getEndJunction() {
+		return end;
 	}
+	/**
+	 * Returns the identification of the road.
+	 * @return identification
+	 */
+	public String getID() {
+		return id;
+	}
+	/**
+	 * Returns the length of the road.
+	 * @return length of the road
+	 */
+	public int getLength() {
+		return length;
+	}
+	
+	/**
+	 * Updates the list of vehicles in the road.
+	 * @param vehicle added to the ones in the road
+	 */
+	public void entersVehicle(Vehicle vehicle) {
+		listvehicles.add(vehicle);
+	}
+	/**
+	 * Removes a vehicle from the list of vehicles in the road.
+	 * @param vehicle
+	 */
+	public void exitsVehicle(Vehicle vehicle) {
+		listvehicles.remove(vehicle);
+	}
+	/**
+	 * Updates the velocity of every vehicle in it and calls their advance method.
+	 */
 	public void advance() {
 		int factorReduction = 0;
 		double baseVel = Math.min(maxVel, Math.floorDiv(maxVel,Math.max(listvehicles.size(), 1)));
@@ -25,18 +67,11 @@ public class Road {
 			factorReduction += (listvehicles.get(i).isOutOfOrder()) ? 1 : 0;
 		}
 	}
-	public String getID() {
-		return id;
-	}
-	public void setID(String id) {
-		this.id = id;
-	}
-	public int getLength() {
-		return length;
-	}
-	public void setLength(int length) {
-		this.length = length;
-	}
+	/**
+	 * Generates a report of the status of the road.
+	 * @param time current time of the simulation
+	 * @return report of the status of the road
+	 */
 	public String generateReport(int time) {
 		String state = new String();
 		for(Vehicle v : listvehicles)
@@ -46,8 +81,5 @@ public class Road {
 		/*
 		 * [road_report] id = r3 time = 4 state = (v2,80),(v3,67) 
 		 */
-	}
-	public Junction getEndJunction() {
-		return fin;
 	}
 }

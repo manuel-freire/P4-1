@@ -1,6 +1,5 @@
 package tp.model.events;
 
-import java.awt.List;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,9 +11,9 @@ public class BrokenVehicleEvent extends Event{
 	private ArrayList<String> vehicles;
 	public BrokenVehicleEvent() {
 		eventId="make_vehicle_faculty";
-		vehicles=new List<String>();
+		vehicles=new ArrayList<String>();
 	}
-	void execute(TrafficSimulator sim) {
+	public void execute(TrafficSimulator sim) {
 		
 	}
 	public Event parser(String id){
@@ -55,10 +54,5 @@ public class BrokenVehicleEvent extends Event{
 		for (int i=0; i<vehicles.size(); i++) {
 			System.out.println(vehicles.get(i));
 		}
-	}
-	@Override
-	void execute() {
-		// TODO Auto-generated method stub
-		
 	}
 }

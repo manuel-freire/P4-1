@@ -22,7 +22,7 @@ public class TrafficSimulator {
 			for(Road r : roads)
 				r.advance();
 			for(Junction j : junctions)
-				j.advance();
+				j.advance(this);
 			contadorTiempo++; 
 			// 5. esciribir un informe en OutputStream en caso de que no sea null 
 			for(Road r : roads)
@@ -37,5 +37,13 @@ public class TrafficSimulator {
 	public void addVehicle(Vehicle v) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public Road getRoad(String road_id, String end_id) {
+		Road road = null;
+		for(Road r: roads)
+			if(r.getID()==road_id&&r.getEndJunction().getID()==end_id)
+				road = r;
+		return road;
 	}
 }

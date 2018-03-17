@@ -12,7 +12,7 @@ public class NewRoadEvent extends Event{
 		eventId="new_road";
 	}
 	@Override
-	void execute(TrafficSimulator sim) {
+	public void execute(TrafficSimulator sim) {
 		Road r = new Road();
 		sim.addRoad(r);
 	}

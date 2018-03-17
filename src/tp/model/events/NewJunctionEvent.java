@@ -17,7 +17,7 @@ public class NewJunctionEvent extends Event {
 		return null;
 		}
 	}
-	void execute(TrafficSimulator sim) {
+	public void execute(TrafficSimulator sim) {
 		Junction j= new Junction(junctionId);
 		sim.addJunction(j);
 	}

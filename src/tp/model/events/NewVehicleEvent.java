@@ -9,15 +9,16 @@ import tp.model.TrafficSimulator;
 import tp.model.simulatedObjects.Road;
 import tp.model.simulatedObjects.Vehicle;
 public class NewVehicleEvent extends Event{
-	String id;
-	private int max_speed;
+	private String id;
+	private int max_speed, max_breakTime;
 	private List<String> it;
+	
 	public NewVehicleEvent() {
 		eventId="new_vehicle";
 		it=new ArrayList<String>();
 	}
 	public void execute(TrafficSimulator sim) {
-		Vehicle v = new Vehicle();
+		Vehicle v = new Vehicle(max_speed,max_breakTime,it,id);
 		sim.addVehicle(v);
 	}
 	public Event parser(String id){
