@@ -1,11 +1,11 @@
-package tp.control;
+package main.control;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 
-import tp.model.TrafficSimulator;
-import tp.model.events.Event;
+import main.model.TrafficSimulator;
+import main.model.events.Event;
 
 public class Controller {
 	private String output;

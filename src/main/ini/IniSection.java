@@ -1,4 +1,4 @@
-package tp.control;
+package main.ini;
 
 import java.io.IOException;
 import java.io.OutputStream;

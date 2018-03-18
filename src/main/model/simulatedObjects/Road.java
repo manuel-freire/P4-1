@@ -1,9 +1,9 @@
-package tp.model.simulatedObjects;
+package main.model.simulatedObjects;
 
 import java.util.ArrayList;
 
-import tp.model.TrafficSimulator;
-import tp.model.simulatedObjects.Vehicle;
+import main.model.TrafficSimulator;
+import main.model.simulatedObjects.Vehicle;
 
 public class Road {
 	private ArrayList<Vehicle> listvehicles = new ArrayList<>();

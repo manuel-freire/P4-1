@@ -1,4 +1,4 @@
-package tp.control;
+package main.ini;
 
 public class IniError extends RuntimeException {
 

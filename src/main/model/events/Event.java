@@ -1,8 +1,8 @@
-package tp.model.events;
+package main.model.events;
 
 import java.io.BufferedReader;
 
-import tp.model.TrafficSimulator;
+import main.model.TrafficSimulator;
 
 public abstract class Event {
 	protected String eventId;

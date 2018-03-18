@@ -1,10 +1,10 @@
-package tp.model.advancedObjects;
+package main.model.advancedObjects;
 
 import java.util.List;
 import java.util.Random;
 
-import tp.model.simulatedObjects.Road;
-import tp.model.simulatedObjects.Vehicle;
+import main.model.simulatedObjects.Road;
+import main.model.simulatedObjects.Vehicle;
 
 public class Bike extends Vehicle {
 	private double breakProb;

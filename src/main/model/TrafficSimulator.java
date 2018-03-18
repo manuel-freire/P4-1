@@ -1,11 +1,12 @@
-package tp.model;
+package main.model;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
-import tp.model.simulatedObjects.*;
-import tp.model.events.Event;
+
+import main.model.events.Event;
+import main.model.simulatedObjects.*;
 
 public class TrafficSimulator {
 	private ArrayList<Junction> junctions;

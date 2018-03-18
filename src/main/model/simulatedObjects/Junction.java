@@ -1,13 +1,14 @@
-package tp.model.simulatedObjects;
+package main.model.simulatedObjects;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.NoSuchElementException;
 
-import tp.model.TrafficSimulator;
+import main.model.TrafficSimulator;
+
+import java.util.NoSuchElementException;
 
 public class Junction {
 	private Map<List<Vehicle>,String> queues;

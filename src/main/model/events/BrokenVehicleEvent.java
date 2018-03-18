@@ -1,10 +1,10 @@
-package tp.model.events;
+package main.model.events;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import tp.model.TrafficSimulator;
+import main.model.TrafficSimulator;
 
 public class BrokenVehicleEvent extends Event{
 	private int duration, time;

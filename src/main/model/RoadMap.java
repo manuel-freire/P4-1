@@ -1,4 +1,4 @@
-package tp.model;
+package main.model;
 
 public class RoadMap {
 

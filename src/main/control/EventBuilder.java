@@ -1,9 +1,9 @@
-package tp.control;
-
-import tp.model.events.*;
+package main.control;
 
 import java.io.*;
 import java.util.ArrayList;
+
+import main.model.events.*;
 
 public class EventBuilder {
 	Event[] parser= {new NewJunctionEvent(), new NewRoadEvent(), new NewVehicleEvent(), new BrokenVehicleEvent()};

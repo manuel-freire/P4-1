@@ -1,4 +1,4 @@
-package tp.control;
+package main;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -13,6 +13,9 @@ import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
+
+import main.ini.*;
+import main.control.*;
 
 // COGIDO DEL EJEMPLO
 public class Main {

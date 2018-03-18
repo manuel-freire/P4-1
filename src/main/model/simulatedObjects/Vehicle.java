@@ -1,9 +1,9 @@
-package tp.model.simulatedObjects;
+package main.model.simulatedObjects;
 
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import tp.model.TrafficSimulator;
+import main.model.TrafficSimulator;
 
 public class Vehicle {
 	private int actualVel, maxVel, location, kilometrage,maxBreakTime;

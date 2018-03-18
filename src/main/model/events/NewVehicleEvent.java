@@ -1,13 +1,13 @@
-package tp.model.events;
+package main.model.events;
 import java.io.BufferedReader;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import tp.model.TrafficSimulator;
-import tp.model.simulatedObjects.Road;
-import tp.model.simulatedObjects.Vehicle;
+import main.model.TrafficSimulator;
+import main.model.simulatedObjects.Road;
+import main.model.simulatedObjects.Vehicle;
 public class NewVehicleEvent extends Event{
 	private String id;
 	private int max_speed, max_breakTime;
