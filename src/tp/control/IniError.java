@@ -1,4 +1,4 @@
-package es.ucm.fdi.ini;
+package tp.control;
 
 public class IniError extends RuntimeException {
 

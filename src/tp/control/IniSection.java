@@ -1,4 +1,4 @@
-package es.ucm.fdi.ini;
+package tp.control;
 
 import java.io.IOException;
 import java.io.OutputStream;

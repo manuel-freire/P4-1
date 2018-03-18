@@ -1,4 +1,4 @@
-package tp;
+package tp.control;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -21,7 +21,10 @@ public class Main {
 	private static Integer _timeLimit = null;
 	private static String _inFile = null;
 	private static String _outFile = null;
-
+	/**
+	 * Reads the arguments provided and parses the commands.
+	 * @param args arguments provided in the execution of the program
+	 */
 	private static void parseArgs(String[] args) {
 		// define the valid command line options
 		//
@@ -54,21 +57,27 @@ public class Main {
 		}
 
 	}
-
+	/**
+	 * Builds the commands necessary for the simulation: help, input, output and ticks.
+	 * @return command options
+	 */
 	private static Options buildOptions() {
 		Options cmdLineOptions = new Options();
 
 		cmdLineOptions.addOption(Option.builder("h").longOpt("help").desc("Print this message").build());
 		cmdLineOptions.addOption(Option.builder("i").longOpt("input").hasArg().desc("Events input file").build());
-		cmdLineOptions.addOption(
-				Option.builder("o").longOpt("output").hasArg().desc("Output file, where reports are written.").build());
+		cmdLineOptions.addOption(Option.builder("o").longOpt("output").hasArg().desc("Output file, where reports are written.").build());
 		cmdLineOptions.addOption(Option.builder("t").longOpt("ticks").hasArg()
 				.desc("Ticks to execute the simulator's main loop (default value is " + _timeLimitDefaultValue + ").")
 				.build());
 
 		return cmdLineOptions;
 	}
-
+	/**
+	 * Parser for the help option. Prints the helping guides if successful.
+	 * @param line command line
+	 * @param cmdLineOptions command options
+	 */
 	private static void parseHelpOption(CommandLine line, Options cmdLineOptions) {
 		if (line.hasOption("h")) {
 			HelpFormatter formatter = new HelpFormatter();
@@ -76,18 +85,32 @@ public class Main {
 			System.exit(0);
 		}
 	}
-
+	/**
+	 * Parser for the input option. Sets the input file is successful. 
+	 * @param line command line
+	 * @param cmdLineOptions command options
+	 * @throws ParseException if the file is missing
+	 */
 	private static void parseInFileOption(CommandLine line) throws ParseException {
 		_inFile = line.getOptionValue("i");
 		if (_inFile == null) {
 			throw new ParseException("An events file is missing");
 		}
 	}
-
+	/**
+	 * Parser for the output option. Sets the output file is successful. 
+	 * @param line command line
+	 * @param cmdLineOptions command options
+	 * @throws ParseException if the file is missing
+	 */
 	private static void parseOutFileOption(CommandLine line) throws ParseException {
 		_outFile = line.getOptionValue("o");
 	}
-
+	/**
+	 * Parser for the steps option. Sets the steps of the simulation if successful.
+	 * @param line
+	 * @throws ParseException if the steps provided is invalid
+	 */
 	private static void parseStepsOption(CommandLine line) throws ParseException {
 		String t = line.getOptionValue("t", _timeLimitDefaultValue.toString());
 		try {
@@ -99,7 +122,7 @@ public class Main {
 	}
 
 	/**
-	 * This method run the simulator on all files that ends with .ini if the given
+	 * This method run the simulator on all files that ends with .ini in the given
 	 * path, and compares that output to the expected output. It assumes that for
 	 * example "example.ini" the expected output is stored in "example.ini.eout".
 	 * The simulator's output will be stored in "example.ini.out"
@@ -166,11 +189,10 @@ public class Main {
 
 		// Call test in order to test the simulator on all examples in a directory.
 		//
-	    //	test("resources/examples/events/basic");
+		test("resources/examples/events/basic");
 
 		// Call start to start the simulator from command line, etc.
 		start(args);
-
 	}
 
 

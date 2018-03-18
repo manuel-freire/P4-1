@@ -1,4 +1,4 @@
-package es.ucm.fdi.ini;
+package tp.control;
 
 import java.io.BufferedReader;
 import java.io.File;
