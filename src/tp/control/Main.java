@@ -149,7 +149,14 @@ public class Main {
 		}
 
 	}
-
+	/**
+	 * Tests an example.
+	 * @param inFile 
+	 * @param outFile
+	 * @param expectedOutFile
+	 * @param timeLimit
+	 * @throws IOException if the reading is unsuccessful
+	 */
 	private static void test(String inFile, String outFile, String expectedOutFile, int timeLimit) throws IOException {
 		_outFile = outFile;
 		_inFile = inFile;
@@ -161,16 +168,19 @@ public class Main {
 	}
 
 	/**
-	 * Run the simulator in batch mode
+	 * Constructs a simulation controller, sets up the simulation and starts it.
 	 * 
-	 * @throws IOException
+	 * @throws IOException if the files couldn't be opened
 	 */
 	private static void startBatchMode() throws IOException {
-		// TODO
-		// Add your code here. Note that the input argument where parsed and stored into
-		// corresponding fields.
+		Controller controller = new Controller(_inFile, _outFile,_timeLimit);
+		controller.run();
 	}
-
+	/**
+	 * Parses the commands and calls the startBatchMode method.
+	 * @param args commands provided
+	 * @throws IOException if the parse is unsuccessful
+	 */
 	private static void start(String[] args) throws IOException {
 		parseArgs(args);
 		startBatchMode();
