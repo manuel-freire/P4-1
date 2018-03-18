@@ -18,7 +18,7 @@ public class Road {
 		this.id = id;
 		this.length = length;
 		this.dest = dest;
-		this.max_speed = max_speed;
+		this.setMaxSpeed(max_speed);
 	}
 	
 	/**
@@ -55,25 +55,25 @@ public class Road {
 	 * @param vehicle added to the ones in the road
 	 */
 	public void entersVehicle(Vehicle vehicle) {
-		listvehicles.add(vehicle);
+		getListVehicles().add(vehicle);
 	}
 	/**
 	 * Removes a vehicle from the list of vehicles in the road.
 	 * @param vehicle
 	 */
 	public void exitsVehicle(Vehicle vehicle) {
-		listvehicles.remove(vehicle);
+		getListVehicles().remove(vehicle);
 	}
 	/**
 	 * Updates the velocity of every vehicle in it and calls their advance method.
 	 */
 	public void advance(TrafficSimulator sim) {
-		int factorReduction = 0;
-		double baseVel = Math.min(max_speed, Math.floorDiv(max_speed,Math.max(listvehicles.size(), 1)));
-		for(int i = listvehicles.size()-1; i >= 0 ; i-- ) {
-			listvehicles.get(i).setActualVel((int)baseVel/factorReduction);
-			listvehicles.get(i).advance(sim);
-			factorReduction += (listvehicles.get(i).isOutOfOrder()) ? 1 : 0;
+		int reduction_factor = 0;
+		double base_speed = Math.min(getMaxSpeed(), Math.floorDiv(getMaxSpeed(),Math.max(getListVehicles().size(), 1)));
+		for(Vehicle v : getListVehicles()) {
+			v.setActualVel((int)base_speed/reduction_factor);
+			v.advance(sim);
+			reduction_factor += (v.isOutOfOrder()) ? 1 : 0;
 		}
 	}
 	/**
@@ -86,8 +86,24 @@ public class Road {
 		 * [road_report] id = r3 time = 4 state = (v2,80),(v3,67) 
 		 */
 		String state = new String();
-		for(Vehicle v : listvehicles)
+		for(Vehicle v : getListVehicles())
 			state += "(" + v.getID() + "," + v.getLocation() + ")";
 		return "[road_report]\n id = " + id + "\n time = " + time + "\n state" + state;
+	}
+
+	public int getMaxSpeed() {
+		return max_speed;
+	}
+
+	public void setMaxSpeed(int max_speed) {
+		this.max_speed = max_speed;
+	}
+
+	public ArrayList<Vehicle> getListVehicles() {
+		return listvehicles;
+	}
+
+	public void setListVehicles(ArrayList<Vehicle> listvehicles) {
+		this.listvehicles = listvehicles;
 	}
 }
