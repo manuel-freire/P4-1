@@ -6,22 +6,12 @@ import java.util.Random;
 import main.model.simulatedObjects.Road;
 import main.model.simulatedObjects.Vehicle;
 
-public class Bike extends Vehicle {
-	private double breakProb;
-	private Random rand; 
-	
-	public Bike(List<Road> itinerary, int seed, String id) {
-		super(0,0,itinerary,id);
-		rand = new Random(seed);
+public class Bike extends Vehicle {	
+	public Bike(List<String> itinerary, String id, int max_speed, int max_fault_duration) {
+		super(max_speed,max_fault_duration,itinerary,id);
 	}
-	public void advanceBike() {
-		if(!isOutOfOrder())
-			if(getActualVel() < getMaxVel()/2) {
-				if(rand.nextDouble() < breakProb)
-					setBrokenTime(rand.nextInt(getMaxBreakTime()));
-				else
-					advance();
-			}else
-				advance();
+	public void setBrokenTime(int brokenTime) {
+		if(this.getActualVel() > this.getMaxVel()/2)
+			this.brokenTime = brokenTime;
 	}
 }

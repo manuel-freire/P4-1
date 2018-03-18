@@ -10,7 +10,7 @@ public class Vehicle {
 	private List<String> itinerary;
 	private Road actualRoad;
 	private String id;
-	private int brokenTime;
+	protected int brokenTime;
 	
 	/**
 	 * Constructs a vehicle with its desired behaviour.

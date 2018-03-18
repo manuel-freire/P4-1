@@ -1,5 +1,7 @@
 package main.model.advancedObjects;
 
-public class Dirt {
+import main.model.simulatedObjects.Road;
+
+public class Dirt extends Road{
 
 }
