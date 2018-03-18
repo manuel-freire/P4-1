@@ -9,6 +9,6 @@ public class TestTrafficSimulator {
 	@Test
 	public void testFoo() {
 		//do stuff
-		assertEquals(/*pim*/,/*pum*/);
+		//assertEquals(/*pim*/,/*pum*/);
 	}
 }

@@ -2,8 +2,10 @@ package main;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.FilenameFilter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.lang.reflect.InvocationTargetException;
 
 import org.apache.commons.cli.CommandLine;
@@ -134,7 +136,7 @@ public class Main {
 	 */
 	private static void test(String path) throws IOException {
 
-		File dir = new File(path);
+		File dir = new File(System.getProperty("user.dir") + path);
 
 		if ( !dir.exists() ) {
 			throw new FileNotFoundException(path);
@@ -202,8 +204,12 @@ public class Main {
 
 		// Call test in order to test the simulator on all examples in a directory.
 		//
-		test("src/resources/examples/events/basic");
-
+		test("/src/resources/examples/basic");
+		/*
+		 * PrintWriter pw = new PrintWriter(new FileWriter("resources/examples/events/basic/whereami.txt"));
+        pw.println("hello");
+        pw.close();
+		 */
 		// Call start to start the simulator from command line, etc.
 		start(args);
 	}

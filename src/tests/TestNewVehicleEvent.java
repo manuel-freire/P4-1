@@ -35,8 +35,8 @@ public class TestNewVehicleEvent {
 		sim.addEvent(new NewVehicleEvent("id", 0, 0, list));
 		try {
 		assertEquals(sim.getVehicles().get(0).getActualRoad().getID(),"id");
-		}catch(IndexOutOfBoundsException e) {
-			e.printStackTrace();
+		}catch(IndexOutOfBoundsException ex) {
+			ex.printStackTrace();
 		}
 	}
 	@Test
