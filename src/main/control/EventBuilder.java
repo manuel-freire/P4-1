@@ -9,7 +9,10 @@ public class EventBuilder {
 	Event[] parser= {new NewJunctionEvent(), new NewRoadEvent(), new NewVehicleEvent(), new BrokenVehicleEvent()};
 	BufferedReader b;
 	String fileName;
-	
+	/**
+	 * Class constructor
+	 * @param filename path to the input file
+	 */
 	public EventBuilder(String filename) {
 		this.fileName=filename;
 		FileReader fr = null;
@@ -20,6 +23,11 @@ public class EventBuilder {
 		}    
          this.b=new BufferedReader(fr);  
 	}
+	/**
+	 * Reads from the file and returns all the events recorded.
+	 * @return array of events read from the file
+	 * @throws IllegalArgumentException if the parameters or format of the events were incorrect.
+	 */
 	public ArrayList<Event> Builder() throws IllegalArgumentException  {
 		String dataID = null;
 		ArrayList<Event> eventList = new ArrayList<Event>();
