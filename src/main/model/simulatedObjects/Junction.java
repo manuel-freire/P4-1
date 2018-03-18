@@ -20,7 +20,7 @@ public class Junction {
 	 * @param id identification of the junction
 	 */
 	public Junction(String id) {
-		it = queues.entrySet().iterator();
+		setIt(getQueues().entrySet().iterator());
 	}
 	
 	/**
@@ -36,7 +36,7 @@ public class Junction {
 	 * @param road_id incoming road's id
 	 */
 	public void addRoad(String road_id) {
-		queues.put(new ArrayList<Vehicle>(), road_id);
+		getQueues().put(new ArrayList<Vehicle>(), road_id);
 	}
 	/**
 	 * Enters a vehicle in the junction.
@@ -44,7 +44,7 @@ public class Junction {
 	 * @param r road it came from
 	 */
 	public void enterVehicle(Vehicle vehicle, String road_id) {
-		for (Map.Entry<List<Vehicle>,String> entry : queues.entrySet())
+		for (Map.Entry<List<Vehicle>,String> entry : getQueues().entrySet())
 			if(entry.getValue() == road_id)
 				entry.getKey().add(vehicle);
 	}
@@ -52,10 +52,10 @@ public class Junction {
 	 * Moves the vehicles that can advance to the next road.
 	 */
 	public void advance(TrafficSimulator sim) {
-		if(!it.hasNext())
-			it = queues.entrySet().iterator();
+		if(!getIt().hasNext())
+			setIt(getQueues().entrySet().iterator());
 		try {
-		Entry<List<Vehicle>, String> pair = it.next();
+		Entry<List<Vehicle>, String> pair = getIt().next();
 		if(!pair.getKey().isEmpty()) {
 			pair.getKey().get(0).advanceToNextRoad(sim);
 			pair.getKey().remove(0);
@@ -77,13 +77,13 @@ public class Junction {
 		 * queues = (r1,red,[]),(r2,green,[v3,v2,v5]),(r3,red,[v1,v4]) 
 		 */
 		String queuesString = new String();
-		Iterator<Entry<List<Vehicle>, String>> it = queues.entrySet().iterator();
+		Iterator<Entry<List<Vehicle>, String>> it = getQueues().entrySet().iterator();
 		while(it.hasNext()) {
 			Entry<List<Vehicle>, String> entry = it.next();
 			queuesString += "(";
 			for(int t = 0; t < entry.getKey().size(); t++) {
 				queuesString += entry.getKey().get(t).getID();
-				if(t < queues.size()-1)
+				if(t < getQueues().size()-1)
 					queuesString += ",";
 			}
 			if(it.hasNext())
@@ -91,6 +91,22 @@ public class Junction {
 			it.next();
 		}
 		return "[junction_report]\nid = " + id + "\n time = " + time + "\n queues = " + queuesString;
+	}
+
+	public Iterator<Map.Entry<List<Vehicle>,String>> getIt() {
+		return it;
+	}
+
+	public void setIt(Iterator<Map.Entry<List<Vehicle>,String>> it) {
+		this.it = it;
+	}
+
+	public Map<List<Vehicle>,String> getQueues() {
+		return queues;
+	}
+
+	public void setQueues(Map<List<Vehicle>,String> queues) {
+		this.queues = queues;
 	}
 
 }
