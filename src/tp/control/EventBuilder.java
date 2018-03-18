@@ -1,10 +1,6 @@
 package tp.control;
 
-import tp.model.events.BrokenVehicleEvent;
-import tp.model.events.Event;
-import tp.model.events.NewJunctionEvent;
-import tp.model.events.NewRoadEvent;
-import tp.model.events.NewVehicleEvent;
+import tp.model.events.*;
 
 import java.io.*;
 import java.util.ArrayList;
