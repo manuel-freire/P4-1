@@ -3,19 +3,25 @@ import java.io.BufferedReader;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 import main.model.TrafficSimulator;
-import main.model.simulatedObjects.Road;
 import main.model.simulatedObjects.Vehicle;
+
 public class NewVehicleEvent extends Event{
 	private String id;
 	private int max_speed, max_breakTime;
-	private List<String> it;
+	private ArrayList<String> it;
 	
 	public NewVehicleEvent() {
 		eventId="[new_vehicle]";
 		it=new ArrayList<String>();
+	}
+	public NewVehicleEvent(String id, int max_speed, int max_breakTime, ArrayList<String> it) { // For testing purposes
+		eventId="[new_vehicle]";
+		this.it = it;
+		this.id = id;
+		this.max_breakTime = max_breakTime;
+		this.max_speed = max_speed;
 	}
 	public void execute(TrafficSimulator sim) {
 		Vehicle v = new Vehicle(max_speed,max_breakTime,it,id);

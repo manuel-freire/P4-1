@@ -105,4 +105,37 @@ public class TrafficSimulator {
 	public void addJunction(Junction j) {
 		junctions.add(j);
 	}
+	/**
+	 * Sets the broken down duration of every desired vehicle to the one provided.
+	 * @param vehicles_id 
+	 * @param duration 
+	 */
+	public void breakVehicles(ArrayList<String> vehicles_id, int duration) {
+		for(String id : vehicles_id)
+			for(Vehicle v : vehicles)
+				if(v.getID() == id) {
+					v.setBrokenTime(duration);
+					vehicles_id.remove(id);
+				}
+	}
+	
+	// Testing
+	public ArrayList<Junction> getJunctions() {
+		return junctions;
+	}
+	public ArrayList<Road> getRoads() {
+		return roads;
+	}
+	public ArrayList<Vehicle> getVehicles() {
+		return vehicles;
+	}
+	public ArrayList<Event> getEvents() {
+		return events;
+	}
+	public int getActualTick() {
+		return actualTick;
+	}
+	public int getTotalTicks() {
+		return totalTicks;
+	}
 }

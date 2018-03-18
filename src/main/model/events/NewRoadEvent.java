@@ -12,6 +12,14 @@ public class NewRoadEvent extends Event{
 	public NewRoadEvent() {
 		eventId="[new_road]";
 	}
+	public NewRoadEvent(String id, String src, String dest, int max_speed, int length) { // For testing purposes
+		eventId="[new_road]";
+		this.dest = dest;
+		this.src = src;
+		this.id = id;
+		this.length = length;
+		this.max_speed = max_speed;
+	}
 	@Override
 	public void execute(TrafficSimulator sim) {
 		Road r = new Road(id, src, dest, max_speed, length);

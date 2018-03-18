@@ -9,43 +9,39 @@ import main.model.TrafficSimulator;
 public class BrokenVehicleEvent extends Event{
 	private int duration, time;
 	private ArrayList<String> vehicles;
+	
 	public BrokenVehicleEvent() {
-		eventId="make_vehicle_faculty";
+		eventId="[make_vehicle_faculty]";
 		vehicles=new ArrayList<String>();
 	}
+	public BrokenVehicleEvent(ArrayList<String> vehicles_id,int dur) { //Only for testing purposes
+		eventId="[make_vehicle_faculty]";
+		vehicles=vehicles_id;
+		this.duration = dur;
+	}
 	public void execute(TrafficSimulator sim) {
-		
+		sim.breakVehicles(vehicles,duration);
 	}
 	public Event parser(String id){
-		if (eventId.equals(id)) {
-		return this;
-	} else {
-		return null;
-		}
+		if (eventId.equals(id))
+			return this;
+		else
+			return null;
 	}
 	public void builder(BufferedReader reader) {
 		String[]arr = null;
 		try {
 			arr=reader.readLine().split(" ");
+			time=Integer.parseInt(arr[2]);
+			arr=reader.readLine().split(" ");
+			arr=arr[2].split(",");
+			for (int i=0; i<arr.length; i++)
+				vehicles.add(arr[i]);
+			arr=reader.readLine().split(" ");
+			duration=Integer.parseInt(arr[2]);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		time=Integer.parseInt(arr[2]);
-		try {
-			arr=reader.readLine().split(" ");
-			arr=arr[2].split(",");
-		} catch (IOException e) {
-				 e.printStackTrace();
-			 }
-			for (int i=0; i<arr.length; i++) {
-				vehicles.add(arr[i]);
-			}
-		try {
-			arr=reader.readLine().split(" ");
-		} catch (IOException e) {
-				e.printStackTrace();
-		}
-		duration=Integer.parseInt(arr[2]);
 	}
 	public void print() {  //Only for testing purposes
 		System.out.println(eventId);
