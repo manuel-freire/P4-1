@@ -202,7 +202,7 @@ public class Main {
 
 		// Call test in order to test the simulator on all examples in a directory.
 		//
-		test("resources/examples/events/basic");
+		test("src/resources/examples/events/basic");
 
 		// Call start to start the simulator from command line, etc.
 		start(args);
