@@ -114,7 +114,7 @@ public class TrafficSimulator {
 		for(String id : vehicles_id)
 			for(Vehicle v : vehicles)
 				if(v.getID() == id) {
-					v.setBrokenTime(duration);
+					v.setFaultTime(duration);
 					vehicles_id.remove(id);
 				}
 	}

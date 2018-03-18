@@ -6,7 +6,7 @@ import java.util.NoSuchElementException;
 import main.model.TrafficSimulator;
 
 public class Vehicle {
-	private int actualVel, maxVel, location, kilometrage,maxBreakTime;
+	private int actualVel, maxVel, location, kilometrage,max_fault_duration;
 	private List<String> itinerary;
 	private Road actualRoad;
 	private String id;
@@ -22,8 +22,8 @@ public class Vehicle {
 	public Vehicle(int maxVel, int maxBreakTime, List<String> itinerary, String id) {
 		this.maxVel = maxVel;
 		this.itinerary = itinerary;
-		this.maxBreakTime = maxBreakTime;
-		this.id = id;
+		this.max_fault_duration = maxBreakTime;
+		this.setId(id);
 	}
 	
 	/**
@@ -53,7 +53,7 @@ public class Vehicle {
 	 * @return maximum time to be broken down.
 	 */
 	public int getMaxBreakTime() {
-		return maxBreakTime;
+		return max_fault_duration;
 	}
 	/**
 	 * Returns the maximum velocity of the vehicle.
@@ -74,7 +74,7 @@ public class Vehicle {
 	 * @return identification
 	 */
 	public String getID() {
-		return id;
+		return getId();
 	}
 	/**
 	 * Returns if the vehicle is out of order.
@@ -86,10 +86,13 @@ public class Vehicle {
 	
 	/**
 	 * Sets the time it will be out of order.
-	 * @param brokenTime time to be broken down.
+	 * @param fault_time time to be broken down.
 	 */
-	public void setBrokenTime(int brokenTime) {
-		this.brokenTime = brokenTime;
+	public void setFaultTime(int fault_time) {
+		if(fault_time>this.max_fault_duration)
+			this.brokenTime = max_fault_duration;
+		else
+			this.brokenTime = fault_time;
 	}
 	/**
 	 * Updates the velocity of the vehicle.
@@ -142,7 +145,7 @@ public class Vehicle {
 			r.entersVehicle(this);
 		}catch(IndexOutOfBoundsException e) {
 			System.out.println(e.getMessage());
-			System.out.println("Vehicle "+id+" should have reached its destination.");
+			System.out.println("Vehicle "+getId()+" should have reached its destination.");
 		}
 	}
 	/**
@@ -151,6 +154,22 @@ public class Vehicle {
 	 * @return String of the report
 	 */
 	public String generateReport(int time) {
-		return "[Vehicle report]\n id = " + id + "\n time = " + time + "\n kilometrage = " + kilometrage + "\n (" + actualRoad.getID() + "," + location + ")";
+		return "[Vehicle report]\n id = " + getId() + "\n time = " + time + "\n kilometrage = " + getKilometrage() + "\n (" + actualRoad.getID() + "," + location + ")";
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public int getKilometrage() {
+		return kilometrage;
+	}
+
+	public void setKilometrage(int kilometrage) {
+		this.kilometrage = kilometrage;
 	}
 }
