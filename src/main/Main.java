@@ -211,14 +211,7 @@ public class Main {
 		test("/src/resources/examples/basic");
 		
 		// Call start to start the simulator from command line, etc.
-		//start(args);
-		ownMain();
-	}
-	public static void ownMain() {
-		//00_helloWorld.ini\
-		_inFile="00_helloWorld.ini";
-		Controller controller = new Controller("00_helloWorld.ini", "test.txt", 10);
-		controller.run();
+		start(args);
 	}
 }
 
