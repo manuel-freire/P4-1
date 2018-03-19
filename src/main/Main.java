@@ -7,6 +7,8 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
@@ -16,7 +18,9 @@ import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
+import es.ucm.fdi.ini.Demo;
 import main.ini.*;
+import main.model.events.Event;
 import main.control.*;
 
 // COGIDO DEL EJEMPLO
@@ -190,6 +194,7 @@ public class Main {
 		parseArgs(args);
 		startBatchMode();
 	}
+	
 
 	public static void main(String[] args) throws IOException, InvocationTargetException, InterruptedException {
 
@@ -204,15 +209,21 @@ public class Main {
 
 		// Call test in order to test the simulator on all examples in a directory.
 		//
-		test("/src/resources/examples/basic");
+		//test("/src/resources/examples/basic");
 		/*
 		 * PrintWriter pw = new PrintWriter(new FileWriter("resources/examples/events/basic/whereami.txt"));
         pw.println("hello");
         pw.close();
 		 */
 		// Call start to start the simulator from command line, etc.
-		start(args);
+		//start(args);
+		ownMain();
 	}
-
-
+	public static void ownMain() {
+		//00_helloWorld.ini\
+		_inFile="00_helloWorld.ini";
+		Controller controller = new Controller("00_helloWorld.ini", "test.txt", 10);
+		controller.run();
+	}
 }
+

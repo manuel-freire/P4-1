@@ -16,6 +16,10 @@ public class TrafficSimulator {
 	int actualTick, totalTicks;
 	
 	public TrafficSimulator(int ticks) {
+		events=new ArrayList<Event>();
+		junctions=new ArrayList<Junction>();
+		roads=new ArrayList<Road>();
+		vehicles=new ArrayList<Vehicle>();
 		actualTick = 0;
 		this.totalTicks = ticks;
 	}
@@ -137,5 +141,21 @@ public class TrafficSimulator {
 	}
 	public int getTotalTicks() {
 		return totalTicks;
+	}
+	//Testing
+	public void printJunctions() {
+		for (int i=0; i<junctions.size(); i++) {
+			junctions.get(i).print();
+		}
+	}
+	public void printRoads() {
+		for (int i=0; i<roads.size(); i++) {
+			roads.get(i).print();
+		}
+	}
+	public void printVehicles() {
+		for (int i=0; i<vehicles.size(); i++) {
+			vehicles.get(i).print();
+		}
 	}
 }

@@ -24,4 +24,9 @@ public class Dirt extends Road{
 			reduction_factor += (v.isOutOfOrder()) ? 1 : 0;
 		}
 	}
+	public void print() {
+		System.out.println("dirt");
+		System.out.println("id "+ id);
+		
+	}
 }

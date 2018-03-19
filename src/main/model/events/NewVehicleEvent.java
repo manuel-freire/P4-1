@@ -4,28 +4,41 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import es.ucm.fdi.ini.IniSection;
 import main.model.TrafficSimulator;
+import main.model.advancedObjects.Bike;
+import main.model.advancedObjects.Car;
 import main.model.simulatedObjects.Vehicle;
 
 public class NewVehicleEvent extends Event{
-	private String id;
-	private int max_speed, max_breakTime;
+	private String id, type;
+	private int max_speed, max_breakTime, resistance, 
+	max_fault_duration;
+	private double faultProbability;
 	private ArrayList<String> it;
 	
 	public NewVehicleEvent() {
-		eventId="[new_vehicle]";
+		eventId="new_vehicle";
 		it=new ArrayList<String>();
 	}
 	public NewVehicleEvent(String id, int max_speed, int max_breakTime, ArrayList<String> it) { // For testing purposes
-		eventId="[new_vehicle]";
+		eventId="new_vehicle";
 		this.it = it;
 		this.id = id;
 		this.max_breakTime = max_breakTime;
 		this.max_speed = max_speed;
 	}
 	public void execute(TrafficSimulator sim) {
-		Vehicle v = new Vehicle(max_speed,max_breakTime,it,id);
-		sim.addVehicle(v);
+		if (type=="bike") {
+			Bike b = new Bike(it,id,max_speed,max_fault_duration);
+			sim.addVehicle(b);
+		} else if(type=="car") {
+			Car c = new Car(id, it, max_speed,max_fault_duration, resistance,0,faultProbability);
+			sim.addVehicle(c);
+		} else {
+			Vehicle v = new Vehicle(max_speed, max_breakTime, it,id);
+			sim.addVehicle(v);
+		}
 	}
 	public Event parser(String id){
 		if (eventId.equals(id)) {
@@ -34,31 +47,43 @@ public class NewVehicleEvent extends Event{
 		return null;
 		}
 	}
-	public void builder(BufferedReader reader) {
-		String[]arr = null;
-		try {
-			arr=reader.readLine().split(" ");
-			setTime(Integer.parseInt(arr[2]));
-			arr=reader.readLine().split(" ");
-			id=arr[2];
-			arr=reader.readLine().split(" ");
-		   	max_speed=Integer.parseInt(arr[2]);
-			arr=reader.readLine().split(" ");
-			arr=arr[2].split(",");
-			for (int i=0; i<arr.length; i++)
-				it.add(arr[i]);
-		}catch(IOException e) {
-			System.out.println(e.getMessage());
-			e.printStackTrace();
+	public void builder(IniSection sec) {
+		this.time=Integer.parseInt(sec.getValue("time"));
+		this.type=sec.getValue("type");
+		this.id=sec.getValue("id");
+		String[]iti=sec.getValue("itinerary").split(",");
+		for (int i=0; i<iti.length; i++) {
+			this.it.add(iti[i]);
+		}
+		this.max_speed=Integer.parseInt(sec.getValue("max_speed"));
+		if (type=="bike") {
+			this.max_fault_duration=Integer.parseInt(sec.getValue("max_fault_duration"));
+		} else if(type=="car"){
+			this.faultProbability=Double.parseDouble(sec.getValue("fault_probability"));
+			this.resistance=Integer.parseInt(sec.getValue("resistance"));
+			this.max_fault_duration=Integer.parseInt(sec.getValue("max_fault_duration"));
 		}
 	}
 	public void print() {  //Only for testing purposes
-		System.out.println(eventId);
-		System.out.print("Max_speed, "); System.out.println(max_speed);
-		System.out.print("Time, "); System.out.println(getTime());
-		System.out.print("Id, "); System.out.println(id);
-		for (int i=0;i<it.size(); i++) {
-			System.out.println(it.get(i));
+		System.out.println("---");
+		System.out.println("VEHICLE");
+		System.out.println("Itinerary:");
+		for (int i=0; i<it.size(); i++) {
+			System.out.print(it.get(i)+ ",");
+		}
+		System.out.println("");
+		System.out.println("max_speed "+max_speed);
+		System.out.println("max_fault_duration "+max_fault_duration);
+		if (type=="bike") {
+			System.out.println("bike");
+			System.out.println("id "+id);
+
+		} else {
+			System.out.println("car");
+			System.out.println("id "+id);
+			System.out.println("resistance  "+resistance);
+			System.out.println("fault_probability  "+faultProbability);
+			
 		}
 	}
 }

@@ -2,26 +2,30 @@ package main.control;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+import es.ucm.fdi.ini.Ini;
+import es.ucm.fdi.ini.IniSection;
 import main.model.events.*;
 
 public class EventBuilder {
 	Event[] parser= {new NewJunctionEvent(), new NewRoadEvent(), new NewVehicleEvent(), new BrokenVehicleEvent()};
-	BufferedReader b;
 	String fileName;
+	Ini ini;
 	/**
 	 * Class constructor
 	 * @param filename path to the input file
 	 */
 	public EventBuilder(String filename) {
 		this.fileName=filename;
-		FileReader fr = null;
 		try {
-			fr = new FileReader(filename);
-		} catch (FileNotFoundException e) {
+			this.ini = new Ini(filename);
+		} catch (IOException e) {
 			e.printStackTrace();
-		}    
-         this.b=new BufferedReader(fr);  
+		}
+		
 	}
 	/**
 	 * Reads from the file and returns all the events recorded.
@@ -31,24 +35,21 @@ public class EventBuilder {
 	public ArrayList<Event> Builder() throws IllegalArgumentException  {
 		String dataID = null;
 		ArrayList<Event> eventList = new ArrayList<Event>();
-		try {
-			while((dataID = b.readLine()) != null){ // Reads a line and stores it in dataID, if it can't read any longer exits the loop
-		         Event event = null;
-		         for (Event e : parser) { // Tries to parse the event
-		        	 event=e.parser(dataID);
-			         if (event!=null) {
-			        	 break;
-			         }
-		         }
-		         if (event!=null) // Checks that the dataID was valid
-		        	 event.builder(b); // Calls the event builder to read the rest of the event
-		         else
-		        	 throw new IllegalArgumentException();
-		         eventList.add(event);
-		     }
-		 } catch (IOException e) {
-			e.printStackTrace();
-		 }
+		List<IniSection>sections = new ArrayList<IniSection>();
+		sections=ini.getSections();
+		for (int j=0; j<sections.size(); j++) {
+			Event auxEvent = null;
+			for (Event e:parser) {
+				auxEvent=e.parser(sections.get(j).getTag());
+				if (auxEvent!=null) {
+					break;
+				}
+			}
+				if (auxEvent!=null) {
+					auxEvent.builder(sections.get(j));
+					eventList.add(auxEvent);
+				}
+		}
 	    return eventList;
 	}
 }

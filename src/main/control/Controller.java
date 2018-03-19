@@ -19,10 +19,12 @@ public class Controller {
 	 */
 	public Controller(String input, String output, int ticks) {
 		evBuilder = new EventBuilder(input);
+		this.output=output;
 		ArrayList<Event> eventList = evBuilder.Builder();
 		simulator = new TrafficSimulator(ticks);
-		for(Event e:eventList)
-			simulator.addEvent(e);
+		for (int i=0;i<eventList.size(); i++) {
+			simulator.addEvent(eventList.get(i));
+		}
 	}
 	/**
 	 * Checks the path to the output files and starts the simulation.

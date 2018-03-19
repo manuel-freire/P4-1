@@ -1,6 +1,7 @@
 package main.model.simulatedObjects;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -20,7 +21,9 @@ public class Junction {
 	 * @param id identification of the junction
 	 */
 	public Junction(String id) {
-		setIt(getQueues().entrySet().iterator());
+		queues = new HashMap<List<Vehicle>, String>();
+		it = getQueues().entrySet().iterator();
+		this.id=id;
 	}
 	
 	/**
@@ -108,5 +111,9 @@ public class Junction {
 	public void setQueues(Map<List<Vehicle>,String> queues) {
 		this.queues = queues;
 	}
-
+	public void print() {
+		System.out.println("Junction");
+		System.out.println("id "+ id);
+		
+	}
 }

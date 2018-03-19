@@ -6,10 +6,14 @@ import java.util.NoSuchElementException;
 import main.model.TrafficSimulator;
 
 public class Vehicle {
-	private int actualVel, maxVel, location, kilometrage,max_fault_duration;
-	private List<String> itinerary;
+	private int actualVel;
+	protected int maxVel;
+	private int location;
+	private int kilometrage;
+	protected int max_fault_duration;
+	public List<String> itinerary;
 	private Road actualRoad;
-	private String id;
+	protected String id;
 	protected int brokenTime;
 	
 	/**
@@ -23,7 +27,7 @@ public class Vehicle {
 		this.maxVel = maxVel;
 		this.itinerary = itinerary;
 		this.max_fault_duration = maxBreakTime;
-		this.setId(id);
+		this.id=id;
 	}
 	
 	/**
@@ -171,5 +175,15 @@ public class Vehicle {
 
 	public void setKilometrage(int kilometrage) {
 		this.kilometrage = kilometrage;
+	}
+	public void print() {
+		System.out.println("vehicle");
+		System.out.println("id "+ id);
+		System.out.println("Itinerary:");
+		for (int i=0; i<itinerary.size(); i++) {
+			System.out.print(itinerary.get(i)+ ",");
+		}
+		System.out.println("max_speed "+maxVel);
+		System.out.println("max_fault_duration "+max_fault_duration);
 	}
 }

@@ -4,13 +4,14 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import es.ucm.fdi.ini.IniSection;
 import main.model.TrafficSimulator;
 import main.model.simulatedObjects.Junction;
 
 public class NewJunctionEvent extends Event {
 	private String junctionId;
 	public NewJunctionEvent() {
-		eventId="[new_junction]";
+		eventId="new_junction";
 	}
 	public NewJunctionEvent(String id) { // For testing purposes
 		eventId=id;
@@ -26,18 +27,13 @@ public class NewJunctionEvent extends Event {
 		Junction j= new Junction(junctionId);
 		sim.addJunction(j);
 	}
-	public void builder(BufferedReader reader) {
-		String[]arr = null;
-		try {
-			arr=reader.readLine().split(" ");
-			setTime(Integer.parseInt(arr[2]));
-			arr=reader.readLine().split(" ");
-			junctionId=arr[2];
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	public void builder(IniSection sec) {
+		junctionId=sec.getValue("id");
+		this.time=Integer.parseInt(sec.getValue("time"));
 	}
 	public void print() {  //Only for testing purposes
+		System.out.println("---");
+		System.out.println("JUNCTION");
 		System.out.print("Time, "); System.out.println(getTime());
 		System.out.print("JunctionID, "); System.out.println(junctionId);
 	}

@@ -8,7 +8,7 @@ import main.model.simulatedObjects.Vehicle;
 public class Road {
 	private ArrayList<Vehicle> listvehicles = new ArrayList<>();
 	private int length, max_speed;
-	private String id;
+	protected String id;
 	private String dest, src;
 	
 	/**
@@ -105,5 +105,9 @@ public class Road {
 
 	public void setListVehicles(ArrayList<Vehicle> listvehicles) {
 		this.listvehicles = listvehicles;
+	}
+	public void print() {
+		System.out.println("road");
+		System.out.println("id "+ id);
 	}
 }

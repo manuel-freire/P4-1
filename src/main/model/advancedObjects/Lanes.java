@@ -30,4 +30,9 @@ public class Lanes extends Road{
 			reduction_factor += (v.isOutOfOrder()) ? 1 : 0;
 		}
 	}
+	public void print() {
+		System.out.println("lane");
+		System.out.println("id "+ id);
+		
+	}
 }
