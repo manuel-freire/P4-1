@@ -6,7 +6,7 @@ import main.model.TrafficSimulator;
 import main.model.simulatedObjects.Vehicle;
 
 public class Road {
-	private ArrayList<Vehicle> listvehicles = new ArrayList<>();
+	private ArrayList<Vehicle> listVehicles = new ArrayList<>();
 	private int length, max_speed;
 	protected String id;
 	private String dest, src;
@@ -63,17 +63,17 @@ public class Road {
 	 */
 	public void advance(TrafficSimulator sim) {
 		int reduction_factor = 1;
-		double base_speed = Math.min(getMaxSpeed(), Math.floorDiv(getMaxSpeed(),Math.max(getListVehicles().size(), 1)));
-		for(int i = 0; i <getListVehicles().size(); i++) {
+		double base_speed = Math.min(getMaxSpeed(), Math.floorDiv(getMaxSpeed(),Math.max(listVehicles.size(), 1)));
+		for(int i = 0; i <listVehicles.size(); i++) {
 			reduction_factor = 1;
-			for(Vehicle aux : getListVehicles())
-				if(aux.isOutOfOrder() && aux.getLocation() > getListVehicles().get(i).getLocation()) {
+			for(Vehicle aux : listVehicles)
+				if(aux.isOutOfOrder() && aux.getLocation() > listVehicles.get(i).getLocation()) {
 					reduction_factor = 2;
 					break;
 				}
-			getListVehicles().get(i).setActualVel((int)base_speed/reduction_factor);
-			if(getListVehicles().get(i).advance(sim)) {
-				getListVehicles().remove(i);
+			listVehicles.get(i).setActualVel((int)base_speed/reduction_factor);
+			if(listVehicles.get(i).advance(sim)) {
+				listVehicles.remove(i);
 				i--;
 			}
 		}
@@ -88,9 +88,9 @@ public class Road {
 		 * [road_report] id = r3 time = 4 state = (v2,80),(v3,67) 
 		 */
 		String state = new String();
-		for(Vehicle v : getListVehicles())
+		for(Vehicle v : listVehicles)
 			state += "(" + v.getID() + "," + v.getLocation() + ")";
-		return "[road_report]id=" + id + "time=" + time + "state" + state;
+		return "[road_report]\nid = " + id + "\ntime = " + time + "\nstate = " + state + "\n";
 	}
 
 	public int getMaxSpeed() {
@@ -102,11 +102,11 @@ public class Road {
 	}
 
 	public ArrayList<Vehicle> getListVehicles() {
-		return listvehicles;
+		return listVehicles;
 	}
 
 	public void setListVehicles(ArrayList<Vehicle> listvehicles) {
-		this.listvehicles = listvehicles;
+		this.listVehicles = listvehicles;
 	}
 	public void print() {
 		System.out.println("road");

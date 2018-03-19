@@ -18,7 +18,6 @@ import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
-import es.ucm.fdi.ini.Demo;
 import main.ini.*;
 import main.model.events.Event;
 import main.control.*;
@@ -154,7 +153,7 @@ public class Main {
 		});
 
 		for (File file : files) {
-			test(file.getAbsolutePath(), file.getAbsolutePath() + ".out", file.getAbsolutePath() + ".eout",100);
+			test(file.getAbsolutePath(), file.getAbsolutePath() + ".out", file.getAbsolutePath() + ".eout",_timeLimitDefaultValue);
 		}
 
 	}

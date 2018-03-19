@@ -89,7 +89,7 @@ public class Junction {
 			if(it.hasNext())
 				queuesString += ")";
 		}
-		return "[junction_report]id=" + id + "time=" + time + "queues=" + queuesString;
+		return "[junction_report]\nid = " + id + "\ntime = " + time + "\nqueues = " + queuesString + "\n";
 	}
 
 	public Iterator<Map.Entry<List<Vehicle>,String>> getIt() {

@@ -48,10 +48,10 @@ public class TrafficSimulator {
 				j.advance(this);
 			actualTick++; 
 			try {
-				for(Road r : roads)
-					ostream.write(r.generateReport(actualTick).getBytes());
 				for(Junction j : junctions)
 					ostream.write(j.generateReport(actualTick).getBytes());
+				for(Road r : roads)
+					ostream.write(r.generateReport(actualTick).getBytes());
 				for(Vehicle v : vehicles)
 					ostream.write(v.generateReport(actualTick).getBytes());
 			}catch(IOException e) {

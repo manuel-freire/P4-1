@@ -13,6 +13,7 @@ public class Vehicle {
 	protected int max_fault_duration;
 	private List<String> itinerary;
 	private Road actualRoad;
+	private boolean arrived;
 	protected String id;
 	protected int brokenTime;
 	
@@ -28,6 +29,8 @@ public class Vehicle {
 		this.setItinerary(itinerary);
 		this.max_fault_duration = maxBreakTime;
 		this.id=id;
+		this.arrived = false;
+		this.location =0;
 	}
 	
 	/**
@@ -131,10 +134,14 @@ public class Vehicle {
 			if(location>actualRoad.getLength()) {
 				location = actualRoad.getLength();
 				exits = true;
-				try {
-					sim.getJunction(actualRoad.getEndJunction()).enterVehicle(this,actualRoad.getID());
-				}catch(NoSuchElementException e) {
-					System.out.println(e.getMessage());
+				if(itinerary.get(0).equals(actualRoad.getSourceJunction()))
+					arrived = true;
+				else {
+					try {
+						sim.getJunction(actualRoad.getEndJunction()).enterVehicle(this,actualRoad.getID());
+					}catch(NoSuchElementException e) {
+						System.out.println(e.getMessage());
+					}
 				}
 			}
 		}else
@@ -162,7 +169,8 @@ public class Vehicle {
 	 * @return String of the report
 	 */
 	public String generateReport(int time) {
-		return "[Vehicle report]id=" + getId() + "time=" + time + "kilometrage=" + getKilometrage() + "(" + actualRoad.getID() + "," + location + ")";
+		String loc = arrived ? "arrived" : String.valueOf(this.location);
+		return "[Vehicle report]\nid = " + getId() + "\ntime = " + time + "\nkilometrage = " + getKilometrage() + "(" + actualRoad.getID() + "," + loc + ")\n";
 	}
 
 	public String getId() {
