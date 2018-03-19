@@ -16,7 +16,15 @@ public class NewVehicleEvent extends Event{
 	max_fault_duration;
 	private double faultProbability;
 	private ArrayList<String> it;
+	private String eventId;
+	private int time;
 	
+	public int getTime() {
+		return time;
+	}
+	public void setTime(int time) {
+		this.time = time;
+	}
 	public NewVehicleEvent() {
 		eventId="new_vehicle";
 		it=new ArrayList<String>();
@@ -42,7 +50,7 @@ public class NewVehicleEvent extends Event{
 	}
 	public Event parser(String id){
 		if (eventId.equals(id)) {
-		return this;
+		return new NewVehicleEvent();
 	} else {
 		return null;
 		}

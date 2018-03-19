@@ -12,6 +12,14 @@ import main.model.simulatedObjects.Road;
 public class NewRoadEvent extends Event{
 	String src, dest, id, type;
 	int max_speed, length, lanes;
+	private String eventId;
+	private int time;
+	public int getTime() {
+		return time;
+	}
+	public void setTime(int time) {
+		this.time = time;
+	}
 	public NewRoadEvent() {
 		eventId="new_road";
 	}
@@ -38,7 +46,7 @@ public class NewRoadEvent extends Event{
 	}
 	public Event parser(String id){
 		if (eventId.equals(id)) {
-		return this;
+		return new NewRoadEvent();
 	} else {
 		return null;
 		}

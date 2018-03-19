@@ -33,23 +33,26 @@ public class Car extends Vehicle {
 	/**
 	 * Advances the vehicle. If it has advanced more than the resistance since being repaired it might break down.
 	 */
-	public void advance(TrafficSimulator sim) {
+	public boolean advance(TrafficSimulator sim) {
+		boolean exits = false;
 			if(!isOutOfOrder() && since_fault >= resistance && rand.nextDouble() < faulty_probability)
 					setFaultTime(rand.nextInt(getMaxBreakTime()+1));
 			else {
 				if(getBrokenTime() <= 0) {
 					setLocation(getLocation() + getActualVel());
-					if(getLocation()>getActualRoad().getLength())
+					if(getLocation()>getActualRoad().getLength()) {
 						setLocation(getActualRoad().getLength());
+						exits = true;
+					}
 					try {
 						sim.getJunction(getActualRoad().getEndJunction()).enterVehicle(this,getActualRoad().getID());
 					}catch(NoSuchElementException e) {
 						System.out.println(e.getMessage());
 					}
-					getActualRoad().exitsVehicle(this);
 				}else
 					setFaultTime(getBrokenTime() - 1);
 			}
+			return exits;
 	}
 	/**
 	 * Generates a report of the status of the vehicle.
@@ -63,8 +66,8 @@ public class Car extends Vehicle {
 		System.out.println("car");
 		System.out.println("id "+ id);
 		System.out.println("Itinerary:");
-		for (int i=0; i<itinerary.size(); i++) {
-			System.out.print(itinerary.get(i)+ ",");
+		for (int i=0; i<getItinerary().size(); i++) {
+			System.out.print(getItinerary().get(i)+ ",");
 		}
 		System.out.println("max_speed "+maxVel);
 		System.out.println("max_fault_duration "+max_fault_duration);

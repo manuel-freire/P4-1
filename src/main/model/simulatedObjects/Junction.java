@@ -57,15 +57,12 @@ public class Junction {
 	public void advance(TrafficSimulator sim) {
 		if(!getIt().hasNext())
 			setIt(getQueues().entrySet().iterator());
-		try {
-		Entry<List<Vehicle>, String> pair = getIt().next();
-		if(!pair.getKey().isEmpty()) {
-			pair.getKey().get(0).advanceToNextRoad(sim);
-			pair.getKey().remove(0);
-		}
-		}catch(NoSuchElementException e) {
-			System.out.println(e.getMessage());
-			System.out.println("Disconnected junction. This should never happen.");
+		if(!queues.isEmpty()) {
+			Entry<List<Vehicle>, String> pair = getIt().next();
+			if(!pair.getKey().isEmpty()) {
+				pair.getKey().get(0).advanceToNextRoad(sim);
+				pair.getKey().remove(0);
+			}
 		}
 	}
 	/**
@@ -91,9 +88,8 @@ public class Junction {
 			}
 			if(it.hasNext())
 				queuesString += ")";
-			it.next();
 		}
-		return "[junction_report]\nid = " + id + "\n time = " + time + "\n queues = " + queuesString;
+		return "[junction_report]id=" + id + "time=" + time + "queues=" + queuesString;
 	}
 
 	public Iterator<Map.Entry<List<Vehicle>,String>> getIt() {

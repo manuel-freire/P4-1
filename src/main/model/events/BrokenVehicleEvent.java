@@ -10,7 +10,14 @@ import main.model.TrafficSimulator;
 public class BrokenVehicleEvent extends Event{
 	private int duration, time;
 	private ArrayList<String> vehicles;
+	private String eventId;
 	
+	public int getTime() {
+		return time;
+	}
+	public void setTime(int time) {
+		this.time = time;
+	}
 	public BrokenVehicleEvent() {
 		eventId="make_vehicle_faculty";
 		vehicles=new ArrayList<String>();
@@ -25,7 +32,7 @@ public class BrokenVehicleEvent extends Event{
 	}
 	public Event parser(String id){
 		if (eventId.equals(id))
-			return this;
+			return new BrokenVehicleEvent();
 		else
 			return null;
 	}

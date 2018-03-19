@@ -18,6 +18,7 @@ public class Road {
 		this.id = id;
 		this.length = length;
 		this.dest = dest;
+		this.src = src;
 		this.setMaxSpeed(max_speed);
 	}
 	
@@ -58,22 +59,23 @@ public class Road {
 		getListVehicles().add(vehicle);
 	}
 	/**
-	 * Removes a vehicle from the list of vehicles in the road.
-	 * @param vehicle
-	 */
-	public void exitsVehicle(Vehicle vehicle) {
-		getListVehicles().remove(vehicle);
-	}
-	/**
 	 * Updates the velocity of every vehicle in it and calls their advance method.
 	 */
 	public void advance(TrafficSimulator sim) {
-		int reduction_factor = 0;
+		int reduction_factor = 1;
 		double base_speed = Math.min(getMaxSpeed(), Math.floorDiv(getMaxSpeed(),Math.max(getListVehicles().size(), 1)));
-		for(Vehicle v : getListVehicles()) {
-			v.setActualVel((int)base_speed/reduction_factor);
-			v.advance(sim);
-			reduction_factor += (v.isOutOfOrder()) ? 1 : 0;
+		for(int i = 0; i <getListVehicles().size(); i++) {
+			reduction_factor = 1;
+			for(Vehicle aux : getListVehicles())
+				if(aux.isOutOfOrder() && aux.getLocation() > getListVehicles().get(i).getLocation()) {
+					reduction_factor = 2;
+					break;
+				}
+			getListVehicles().get(i).setActualVel((int)base_speed/reduction_factor);
+			if(getListVehicles().get(i).advance(sim)) {
+				getListVehicles().remove(i);
+				i--;
+			}
 		}
 	}
 	/**
@@ -88,7 +90,7 @@ public class Road {
 		String state = new String();
 		for(Vehicle v : getListVehicles())
 			state += "(" + v.getID() + "," + v.getLocation() + ")";
-		return "[road_report]\n id = " + id + "\n time = " + time + "\n state" + state;
+		return "[road_report]id=" + id + "time=" + time + "state" + state;
 	}
 
 	public int getMaxSpeed() {

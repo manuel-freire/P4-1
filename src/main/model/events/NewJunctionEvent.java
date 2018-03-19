@@ -10,6 +10,14 @@ import main.model.simulatedObjects.Junction;
 
 public class NewJunctionEvent extends Event {
 	private String junctionId;
+	private String eventId;
+	private int time;
+	public int getTime() {
+		return time;
+	}
+	public void setTime(int time) {
+		this.time = time;
+	}
 	public NewJunctionEvent() {
 		eventId="new_junction";
 	}
@@ -18,7 +26,7 @@ public class NewJunctionEvent extends Event {
 	}
 	public Event parser(String id){
 		if (eventId.equals(id)) {
-		return this;
+		return new NewJunctionEvent();
 	} else {
 		return null;
 		}

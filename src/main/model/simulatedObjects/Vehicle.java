@@ -11,7 +11,7 @@ public class Vehicle {
 	private int location;
 	private int kilometrage;
 	protected int max_fault_duration;
-	public List<String> itinerary;
+	private List<String> itinerary;
 	private Road actualRoad;
 	protected String id;
 	protected int brokenTime;
@@ -25,7 +25,7 @@ public class Vehicle {
 	 */
 	public Vehicle(int maxVel, int maxBreakTime, List<String> itinerary, String id) {
 		this.maxVel = maxVel;
-		this.itinerary = itinerary;
+		this.setItinerary(itinerary);
 		this.max_fault_duration = maxBreakTime;
 		this.id=id;
 	}
@@ -122,35 +122,39 @@ public class Vehicle {
 	
 	/**
 	 * Updates the vehicle's position in the road. If it has reached the end of the road it enters the junction and exits from the road.
+	 * @return 
 	 */
-	public void advance(TrafficSimulator sim) {
+	public boolean advance(TrafficSimulator sim) {
+		boolean exits = false;
 		if(brokenTime <= 0) {
 			location += actualVel;
-			if(location>actualRoad.getLength())
+			if(location>actualRoad.getLength()) {
 				location = actualRoad.getLength();
-			try {
-				sim.getJunction(actualRoad.getEndJunction()).enterVehicle(this,actualRoad.getID());
-			}catch(NoSuchElementException e) {
-				System.out.println(e.getMessage());
+				exits = true;
+				try {
+					sim.getJunction(actualRoad.getEndJunction()).enterVehicle(this,actualRoad.getID());
+				}catch(NoSuchElementException e) {
+					System.out.println(e.getMessage());
+				}
 			}
-			actualRoad.exitsVehicle(this);
 		}else
 			brokenTime--;
+		return exits;
 	}
 	/**
 	 * Advances to the next road.
 	 */
-	public void advanceToNextRoad(TrafficSimulator sim) {
-		actualRoad.exitsVehicle(this);
-		itinerary.remove(0);
-		try {
-			Road r = sim.getRoad(itinerary.get(0),itinerary.get(1));
-			actualRoad = r;
-			r.entersVehicle(this);
-		}catch(IndexOutOfBoundsException e) {
-			System.out.println(e.getMessage());
-			System.out.println("Vehicle "+getId()+" should have reached its destination.");
+	public boolean advanceToNextRoad(TrafficSimulator sim) {
+		boolean ended = true;
+		getItinerary().remove(0);
+		if(getItinerary().size() < 2)
+			ended  = false;
+		else {
+		Road r = sim.getRoad(getItinerary().get(0),getItinerary().get(1));
+		actualRoad = r;
+		r.entersVehicle(this);
 		}
+		return ended;
 	}
 	/**
 	 * Generates a report of the status of the vehicle.
@@ -158,7 +162,7 @@ public class Vehicle {
 	 * @return String of the report
 	 */
 	public String generateReport(int time) {
-		return "[Vehicle report]\n id = " + getId() + "\n time = " + time + "\n kilometrage = " + getKilometrage() + "\n (" + actualRoad.getID() + "," + location + ")";
+		return "[Vehicle report]id=" + getId() + "time=" + time + "kilometrage=" + getKilometrage() + "(" + actualRoad.getID() + "," + location + ")";
 	}
 
 	public String getId() {
@@ -180,10 +184,18 @@ public class Vehicle {
 		System.out.println("vehicle");
 		System.out.println("id "+ id);
 		System.out.println("Itinerary:");
-		for (int i=0; i<itinerary.size(); i++) {
-			System.out.print(itinerary.get(i)+ ",");
+		for (int i=0; i<getItinerary().size(); i++) {
+			System.out.print(getItinerary().get(i)+ ",");
 		}
 		System.out.println("max_speed "+maxVel);
 		System.out.println("max_fault_duration "+max_fault_duration);
+	}
+
+	public List<String> getItinerary() {
+		return itinerary;
+	}
+
+	public void setItinerary(List<String> itinerary) {
+		this.itinerary = itinerary;
 	}
 }

@@ -29,9 +29,19 @@ public class TrafficSimulator {
 	public void execute(FileOutputStream ostream) {
 		int limiteTiempo = this.actualTick + totalTicks - 1; 
 		while (this.actualTick <= limiteTiempo) { 
-			for(Event e: events)
-				if(e.getTime() <= actualTick)
-					e.execute(this);
+			for(int i = 0; i < events.size(); i++) {
+				Event e = events.get(i);
+				if(e.getTime() <= actualTick) {
+					try {
+						e.execute(this);
+						events.remove(i);
+						i--;
+					} catch(Exception ex) {
+						System.out.println(ex.getMessage());
+						ex.printStackTrace();
+					}
+				}
+			}
 			for(Road r : roads)
 				r.advance(this);
 			for(Junction j : junctions)
@@ -58,7 +68,7 @@ public class TrafficSimulator {
 	public Road getRoad(String road_id, String end_id) {
 		Road road = null;
 		for(Road r: roads)
-			if(r.getID()==road_id&&getJunction(r.getEndJunction()).getID()==end_id)
+			if(r.getID().equals(road_id)&&getJunction(r.getEndJunction()).getID().equals(end_id))
 				road = r;
 		if(road == null)
 			throw new NoSuchElementException("The junction does not exist.");
@@ -74,7 +84,7 @@ public class TrafficSimulator {
 	public Junction getJunction(String id) throws NoSuchElementException {
 		Junction jun = null;
 		for(Junction j : junctions)
-			if(j.getID() == id)
+			if(j.getID().equals(id))
 				jun = j;
 		if(jun == null)
 			throw new NoSuchElementException("The junction does not exist.");
@@ -93,14 +103,32 @@ public class TrafficSimulator {
 	 * @param r road to be added
 	 */
 	public void addRoad(Road r) {
+		boolean found = false;
 		roads.add(r);
+		for(Junction j : junctions)
+			if(j.getID().equals(r.getEndJunction())) {
+				j.addRoad(r.getID());
+				found = true;
+			}
+		if(found == false)
+			throw new NoSuchElementException("No junction matches the destination of the road.");
+				
 	}
 	/**
 	 * Add a vehicle to the simulation
 	 * @param v vehicle to be added
 	 */
 	public void addVehicle(Vehicle v) {
+		boolean found = false;
 		vehicles.add(v);
+		for(Road r : roads)
+			if(r.getSourceJunction().equals(v.getItinerary().get(0))) {
+				r.entersVehicle(v);
+				found = true;
+				v.setActualRoad(r);
+			}
+		if(found == false)
+			throw new NoSuchElementException("No road matches the vehicle start.");
 	}
 	/**
 	 * Add a junction to the simulation
@@ -117,7 +145,7 @@ public class TrafficSimulator {
 	public void breakVehicles(ArrayList<String> vehicles_id, int duration) {
 		for(String id : vehicles_id)
 			for(Vehicle v : vehicles)
-				if(v.getID() == id) {
+				if(v.getID().equals(id)) {
 					v.setFaultTime(duration);
 					vehicles_id.remove(id);
 				}

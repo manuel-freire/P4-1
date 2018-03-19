@@ -39,8 +39,8 @@ public class Bike extends Vehicle {
 		System.out.println("bike");
 		System.out.println("id "+ id);
 		System.out.println("Itinerary:");
-		for (int i=0; i<itinerary.size(); i++) {
-			System.out.print(itinerary.get(i)+ ",");
+		for (int i=0; i<getItinerary().size(); i++) {
+			System.out.print(getItinerary().get(i)+ ",");
 		}
 		System.out.println("max_speed "+maxVel);
 		System.out.println("max_fault_duration "+max_fault_duration);

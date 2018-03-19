@@ -33,7 +33,6 @@ public class EventBuilder {
 	 * @throws IllegalArgumentException if the parameters or format of the events were incorrect.
 	 */
 	public ArrayList<Event> Builder() throws IllegalArgumentException  {
-		String dataID = null;
 		ArrayList<Event> eventList = new ArrayList<Event>();
 		List<IniSection>sections = new ArrayList<IniSection>();
 		sections=ini.getSections();
