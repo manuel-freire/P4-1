@@ -49,7 +49,7 @@ public class Road {
 	 */
 	public int getLength() {
 		return length;
-	}
+	} 
 	
 	/**
 	 * Updates the list of vehicles in the road.

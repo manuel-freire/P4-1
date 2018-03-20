@@ -7,7 +7,7 @@ import main.model.TrafficSimulator;
 import main.model.simulatedObjects.Vehicle;
 
 public class Car extends Vehicle {
-	private int resistance, since_fault;
+	private int resistance, since_fault,max_fault_duration;
 	private double faulty_probability;
 	private Random rand; 
 	/**
@@ -21,22 +21,23 @@ public class Car extends Vehicle {
 	 * @param fault_probability  probability to break down
 	 */
 	public Car(String id, ArrayList<String> itinerary, int max_speed, int max_fault_duration, int resistance, int seed, double faulty_probability) {
-		super(max_speed,max_fault_duration,itinerary,id);
+		super(max_speed,itinerary,id);
 		this.faulty_probability = faulty_probability;
+		this.max_fault_duration = max_fault_duration;
 		this.resistance = resistance;
 		this.since_fault = 0;
 		if(seed!=0)
 			rand = new Random(seed);
 		else
 			rand = new Random(System.currentTimeMillis());
-	}
+	} 
 	/**
 	 * Advances the vehicle. If it has advanced more than the resistance since being repaired it might break down.
 	 */
 	public boolean advance(TrafficSimulator sim) {
 		boolean exits = false;
 			if(!isOutOfOrder() && since_fault >= resistance && rand.nextDouble() < faulty_probability)
-					setFaultTime(rand.nextInt(getMaxBreakTime()+1));
+					setFaultTime(rand.nextInt(max_fault_duration+1));
 			else {
 				if(getBrokenTime() <= 0) {
 					setLocation(getLocation() + getActualVel());
@@ -62,14 +63,14 @@ public class Car extends Vehicle {
 	public String generateReport(int time) {
 		return "[Vehicle report]\n id = " + getId() + "\n time = " + time + "\n kilometrage = " + getKilometrage() + "\n (" + getActualRoad().getID() + "," + getLocation() + ")"  + "/n type = car";
 	}
-	public void print() {
-		System.out.println("car");
-		System.out.println("id "+ id);
-		System.out.println("Itinerary:");
-		for (int i=0; i<getItinerary().size(); i++) {
-			System.out.print(getItinerary().get(i)+ ",");
-		}
-		System.out.println("max_speed "+maxVel);
-		System.out.println("max_fault_duration "+max_fault_duration);
+	/**
+	 * Sets the faulty timer of the vehicle to the desired number. If it is higher than the maximum allowed it is set to this maximum.
+	 */
+	public void setFaultTime(int brokenTime) {
+		if(this.getActualVel() > this.getMaxVel()/2)
+			if(this.max_fault_duration<brokenTime)
+				this.brokenTime = this.max_fault_duration;
+			else
+				this.brokenTime = brokenTime;
 	}
 }

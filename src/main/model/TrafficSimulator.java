@@ -3,6 +3,7 @@ package main.model;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 import main.model.events.Event;
@@ -41,7 +42,7 @@ public class TrafficSimulator {
 						ex.printStackTrace();
 					}
 				}
-			}
+			} 
 			for(Road r : roads)
 				r.advance(this);
 			for(Junction j : junctions)
@@ -49,11 +50,11 @@ public class TrafficSimulator {
 			actualTick++; 
 			try {
 				for(Junction j : junctions)
-					ostream.write(j.generateReport(actualTick).getBytes());
+					ostream.write((j.generateReport(actualTick)+'\n').getBytes());
 				for(Road r : roads)
-					ostream.write(r.generateReport(actualTick).getBytes());
+					ostream.write((r.generateReport(actualTick)+'\n').getBytes());
 				for(Vehicle v : vehicles)
-					ostream.write(v.generateReport(actualTick).getBytes());
+					ostream.write((v.generateReport(actualTick)+'\n').getBytes());
 			}catch(IOException e) {
 				System.out.println(e.getMessage());
 			}
@@ -65,10 +66,10 @@ public class TrafficSimulator {
 	 * @param end_id
 	 * @return road that matches the parameters
 	 */
-	public Road getRoad(String road_id, String end_id) {
+	public Road getRoad(String src_id, String end_id) {
 		Road road = null;
 		for(Road r: roads)
-			if(r.getID().equals(road_id)&&getJunction(r.getEndJunction()).getID().equals(end_id))
+			if(r.getSourceJunction().equals(src_id)&&getJunction(r.getEndJunction()).getID().equals(end_id))
 				road = r;
 		if(road == null)
 			throw new NoSuchElementException("The junction does not exist.");
@@ -139,15 +140,14 @@ public class TrafficSimulator {
 	}
 	/**
 	 * Sets the broken down duration of every desired vehicle to the one provided.
-	 * @param vehicles_id 
+	 * @param vehicles2 
 	 * @param duration 
 	 */
-	public void breakVehicles(ArrayList<String> vehicles_id, int duration) {
-		for(String id : vehicles_id)
+	public void breakVehicles(List<String> vehicles2, int duration) {
+		for(String id : vehicles2)
 			for(Vehicle v : vehicles)
 				if(v.getID().equals(id)) {
 					v.setFaultTime(duration);
-					vehicles_id.remove(id);
 				}
 	}
 	
@@ -179,11 +179,6 @@ public class TrafficSimulator {
 	public void printRoads() {
 		for (int i=0; i<roads.size(); i++) {
 			roads.get(i).print();
-		}
-	}
-	public void printVehicles() {
-		for (int i=0; i<vehicles.size(); i++) {
-			vehicles.get(i).print();
 		}
 	}
 }

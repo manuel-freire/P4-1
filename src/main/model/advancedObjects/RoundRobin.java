@@ -15,6 +15,7 @@ public class RoundRobin extends Junction {
 		this.max_time_slice = max_time_slice;
 		this.min_time_slice = min_time_slice;
 	}
+	/*
 	public void advance(TrafficSimulator sim) {
 		if(!getIt().hasNext())
 			setIt(getQueues().entrySet().iterator());
@@ -29,4 +30,5 @@ public class RoundRobin extends Junction {
 			System.out.println("Disconnected junction. This should never happen.");
 		}
 	}
+	*/
 }

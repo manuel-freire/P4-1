@@ -3,13 +3,15 @@ package main.model.events;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import es.ucm.fdi.ini.IniSection;
 import main.model.TrafficSimulator;
 
 public class BrokenVehicleEvent extends Event{
 	private int duration, time;
-	private ArrayList<String> vehicles;
+	private List<String> vehicles;
 	private String eventId;
 	
 	public int getTime() {
@@ -19,13 +21,8 @@ public class BrokenVehicleEvent extends Event{
 		this.time = time;
 	}
 	public BrokenVehicleEvent() {
-		eventId="make_vehicle_faculty";
+		eventId="make_vehicle_faulty";
 		vehicles=new ArrayList<String>();
-	}
-	public BrokenVehicleEvent(ArrayList<String> vehicles_id,int dur) { //Only for testing purposes
-		eventId="make_vehicle_faculty";
-		vehicles=vehicles_id;
-		this.duration = dur;
 	}
 	public void execute(TrafficSimulator sim) {
 		sim.breakVehicles(vehicles,duration);
@@ -37,7 +34,9 @@ public class BrokenVehicleEvent extends Event{
 			return null;
 	}
 	public void builder(IniSection sec) {
-		
+		vehicles  = Arrays.asList(sec.getValue("vehicles").split(","));
+		this.time=Integer.parseInt(sec.getValue("time"));
+		this.duration=Integer.parseInt(sec.getValue("duration"));
 	}
 	public void print() {  //Only for testing purposes
 		System.out.println(eventId);

@@ -21,9 +21,6 @@ public class NewJunctionEvent extends Event {
 	public NewJunctionEvent() {
 		eventId="new_junction";
 	}
-	public NewJunctionEvent(String id) { // For testing purposes
-		eventId=id;
-	}
 	public Event parser(String id){
 		if (eventId.equals(id)) {
 		return new NewJunctionEvent();

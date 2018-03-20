@@ -10,7 +10,6 @@ public class Vehicle {
 	protected int maxVel;
 	private int location;
 	private int kilometrage;
-	protected int max_fault_duration;
 	private List<String> itinerary;
 	private Road actualRoad;
 	private boolean arrived;
@@ -24,10 +23,9 @@ public class Vehicle {
 	 * @param itinerary    collection of junctions it has to go through
 	 * @param id           identification of the vehicle
 	 */
-	public Vehicle(int maxVel, int maxBreakTime, List<String> itinerary, String id) {
+	public Vehicle(int maxVel, List<String> itinerary, String id) {
 		this.maxVel = maxVel;
 		this.setItinerary(itinerary);
-		this.max_fault_duration = maxBreakTime;
 		this.id=id;
 		this.arrived = false;
 		this.location =0;
@@ -54,13 +52,6 @@ public class Vehicle {
 	 */
 	public int getLocation() {
 		return location;
-	}
-	/**
-	 * Returns the maximum time it can be broken down.
-	 * @return maximum time to be broken down.
-	 */
-	public int getMaxBreakTime() {
-		return max_fault_duration;
 	}
 	/**
 	 * Returns the maximum velocity of the vehicle.
@@ -96,17 +87,17 @@ public class Vehicle {
 	 * @param fault_time time to be broken down.
 	 */
 	public void setFaultTime(int fault_time) {
-		if(fault_time>this.max_fault_duration)
-			this.brokenTime = max_fault_duration;
-		else
-			this.brokenTime = fault_time;
+		this.brokenTime = fault_time;
 	}
 	/**
 	 * Updates the velocity of the vehicle.
 	 * @param actualVel velocity of the vehicle.
 	 */
 	public void setActualVel(int actualVel) {
-		this.actualVel = actualVel;
+		if(actualVel <= this.maxVel)
+			this.actualVel = actualVel;
+		else
+			this.actualVel = this.maxVel;
 	}
 	/**
 	 * Updates the road that the vehicle is travelling through.
@@ -122,7 +113,7 @@ public class Vehicle {
 	public void setLocation(int location) {
 		this.location = location;
 	}
-	
+	 
 	/**
 	 * Updates the vehicle's position in the road. If it has reached the end of the road it enters the junction and exits from the road.
 	 * @return 
@@ -130,20 +121,15 @@ public class Vehicle {
 	public boolean advance(TrafficSimulator sim) {
 		boolean exits = false;
 		if(brokenTime <= 0) {
+			int km = location;
 			location += actualVel;
-			if(location>actualRoad.getLength()) {
+			if(location>=actualRoad.getLength()) {
 				location = actualRoad.getLength();
 				exits = true;
-				if(itinerary.get(0).equals(actualRoad.getSourceJunction()))
-					arrived = true;
-				else {
-					try {
-						sim.getJunction(actualRoad.getEndJunction()).enterVehicle(this,actualRoad.getID());
-					}catch(NoSuchElementException e) {
-						System.out.println(e.getMessage());
-					}
-				}
+				actualVel = 0;
+				sim.getJunction(actualRoad.getEndJunction()).enterVehicle(this,actualRoad.getID());
 			}
+			kilometrage += location-km;
 		}else
 			brokenTime--;
 		return exits;
@@ -152,16 +138,19 @@ public class Vehicle {
 	 * Advances to the next road.
 	 */
 	public boolean advanceToNextRoad(TrafficSimulator sim) {
-		boolean ended = true;
+		arrived = false;
 		getItinerary().remove(0);
-		if(getItinerary().size() < 2)
-			ended  = false;
-		else {
-		Road r = sim.getRoad(getItinerary().get(0),getItinerary().get(1));
-		actualRoad = r;
-		r.entersVehicle(this);
+		this.actualVel = 0;
+		this.location = 0;
+		if(getItinerary().size() < 2) {
+			arrived  = true;
 		}
-		return ended;
+		else {
+			Road r = sim.getRoad(getItinerary().get(0),getItinerary().get(1));
+			actualRoad = r;
+			r.entersVehicle(this);
+		}
+		return arrived;
 	}
 	/**
 	 * Generates a report of the status of the vehicle.
@@ -169,8 +158,8 @@ public class Vehicle {
 	 * @return String of the report
 	 */
 	public String generateReport(int time) {
-		String loc = arrived ? "arrived" : String.valueOf(this.location);
-		return "[Vehicle report]\nid = " + getId() + "\ntime = " + time + "\nkilometrage = " + getKilometrage() + "(" + actualRoad.getID() + "," + loc + ")\n";
+		String loc = arrived ? "arrived" : "(" + actualRoad.getID() + "," + location + ")";
+		return "[vehicle_report]\nid = " + getId() + "\ntime = " + time + "\nspeed = " + this.actualVel +  "\nkilometrage = " + getKilometrage() + "\nfaulty = " + getBrokenTime() + "\nlocation = " + loc + "\n";
 	}
 
 	public String getId() {
@@ -187,16 +176,6 @@ public class Vehicle {
 
 	public void setKilometrage(int kilometrage) {
 		this.kilometrage = kilometrage;
-	}
-	public void print() {
-		System.out.println("vehicle");
-		System.out.println("id "+ id);
-		System.out.println("Itinerary:");
-		for (int i=0; i<getItinerary().size(); i++) {
-			System.out.print(getItinerary().get(i)+ ",");
-		}
-		System.out.println("max_speed "+maxVel);
-		System.out.println("max_fault_duration "+max_fault_duration);
 	}
 
 	public List<String> getItinerary() {

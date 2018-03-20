@@ -29,13 +29,6 @@ public class NewVehicleEvent extends Event{
 		eventId="new_vehicle";
 		it=new ArrayList<String>();
 	}
-	public NewVehicleEvent(String id, int max_speed, int max_breakTime, ArrayList<String> it) { // For testing purposes
-		eventId="new_vehicle";
-		this.it = it;
-		this.id = id;
-		this.max_breakTime = max_breakTime;
-		this.max_speed = max_speed;
-	}
 	public void execute(TrafficSimulator sim) {
 		if (type=="bike") {
 			Bike b = new Bike(it,id,max_speed,max_fault_duration);
@@ -44,7 +37,7 @@ public class NewVehicleEvent extends Event{
 			Car c = new Car(id, it, max_speed,max_fault_duration, resistance,0,faultProbability);
 			sim.addVehicle(c);
 		} else {
-			Vehicle v = new Vehicle(max_speed, max_breakTime, it,id);
+			Vehicle v = new Vehicle(max_speed, it,id);
 			sim.addVehicle(v);
 		}
 	}

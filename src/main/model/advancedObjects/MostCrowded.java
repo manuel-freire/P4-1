@@ -14,6 +14,7 @@ public class MostCrowded extends Junction{
 		super(id);
 		// TODO Auto-generated constructor stub
 	}
+	/*
 	public void advance(TrafficSimulator sim) {
 		if(!getIt().hasNext())
 			setIt(getQueues().entrySet().iterator());
@@ -28,4 +29,5 @@ public class MostCrowded extends Junction{
 			System.out.println("Disconnected junction. This should never happen.");
 		}
 	}
+	*/
 }
