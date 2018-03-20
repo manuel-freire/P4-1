@@ -130,8 +130,10 @@ public class Vehicle {
 				sim.getJunction(actualRoad.getEndJunction()).enterVehicle(this,actualRoad.getID());
 			}
 			kilometrage += location-km;
-		}else
+		}else {
 			brokenTime--;
+			this.actualVel = 0;
+		}
 		return exits;
 	}
 	/**
