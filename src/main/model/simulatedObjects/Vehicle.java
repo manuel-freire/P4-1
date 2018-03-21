@@ -94,10 +94,7 @@ public class Vehicle {
 	 * @param actualVel velocity of the vehicle.
 	 */
 	public void setActualVel(int actualVel) {
-		if(actualVel <= this.maxVel)
-			this.actualVel = actualVel;
-		else
-			this.actualVel = this.maxVel;
+		this.actualVel = Math.min(this.maxVel, actualVel);
 	}
 	/**
 	 * Updates the road that the vehicle is travelling through.
