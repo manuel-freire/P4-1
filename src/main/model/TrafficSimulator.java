@@ -29,7 +29,7 @@ public class TrafficSimulator {
 	 */
 	public void execute(FileOutputStream ostream) {
 		int limiteTiempo = this.actualTick + totalTicks - 1; 
-		while (this.actualTick <= limiteTiempo) { 
+		while (this.actualTick <= limiteTiempo) {  
 			for(int i = 0; i < events.size(); i++) {
 				Event e = events.get(i);
 				if(e.getTime() <= actualTick) {
@@ -43,11 +43,11 @@ public class TrafficSimulator {
 					}
 				}
 			} 
-			for(Road r : roads)
+			for(Road r : roads) 
 				r.advance(this);
 			for(Junction j : junctions)
 				j.advance(this);
-			actualTick++; 
+			actualTick++;
 			try {
 				for(Junction j : junctions)
 					ostream.write((j.generateReport(actualTick)+'\n').getBytes());
@@ -127,6 +127,7 @@ public class TrafficSimulator {
 				r.entersVehicle(v);
 				found = true;
 				v.setActualRoad(r);
+				break;
 			}
 		if(found == false)
 			throw new NoSuchElementException("No road matches the vehicle start.");

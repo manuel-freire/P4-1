@@ -1,7 +1,6 @@
 package main.model.simulatedObjects;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +9,7 @@ import java.util.Map.Entry;
 import main.model.TrafficSimulator;
 
 import java.util.NoSuchElementException;
+import java.util.Set;
 
 public class Junction {
 	private ArrayList<ArrayList<Vehicle>> queues;
@@ -59,9 +59,10 @@ public class Junction {
 	public void advance(TrafficSimulator sim) {
 		if(queues.size()!=0) {
 			if(!queues.get(green).isEmpty()) {
-					queues.get(green).get(0).advanceToNextRoad(sim);
-					queues.get(green).get(0).setActualVel(0);
-					queues.get(green).remove(0);
+				Vehicle v = queues.get(green).get(0);
+					v.advanceToNextRoad(sim);
+					v.setActualVel(0);
+					while(queues.get(green).remove(v)) {} 
 			}
 		}
 		green++;
@@ -88,6 +89,8 @@ public class Junction {
 					queuesString += ",";
 			}
 			queuesString += "])";
+			if(i < roads.size()-1)
+				queuesString += ',';
 		}
 		return "[junction_report]\nid = " + id + "\ntime = " + time + "\nqueues = " + queuesString + "\n";
 	}

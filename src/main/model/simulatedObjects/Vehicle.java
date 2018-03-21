@@ -136,12 +136,13 @@ public class Vehicle {
 	/**
 	 * Advances to the next road.
 	 */
-	public boolean advanceToNextRoad(TrafficSimulator sim) {
-		arrived = false;
+	public void advanceToNextRoad(TrafficSimulator sim) {
 		getItinerary().remove(0);
 		this.actualVel = 0;
 		this.location = 0;
+		actualRoad.exitVehicle(this);
 		if(getItinerary().size() < 2) {
+			assert(arrived==true);
 			arrived  = true;
 		}
 		else {
@@ -149,7 +150,6 @@ public class Vehicle {
 			actualRoad = r;
 			r.entersVehicle(this);
 		}
-		return arrived;
 	}
 	/**
 	 * Generates a report of the status of the vehicle.

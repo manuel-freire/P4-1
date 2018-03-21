@@ -67,7 +67,7 @@ public class Road {
 	 *            added to the ones in the road
 	 */
 	public void entersVehicle(Vehicle vehicle) {
-		getListVehicles().add(vehicle);
+		listVehicles.add(vehicle);
 	}
 
 	/**
@@ -80,14 +80,10 @@ public class Road {
 			if(listVehicles.get(i).isOutOfOrder())
 				reduction_factor = 2;
 			listVehicles.get(i).setActualVel((int) base_speed / reduction_factor);
-			if (listVehicles.get(i).advance(sim)) {
-				listVehicles.remove(i);
-				i--;
-			}
+			listVehicles.get(i).advance(sim);
 		}
 		Collections.sort(listVehicles, new Comparator<Vehicle>() {
 			public int compare(Vehicle v2, Vehicle v1) {
-
 				return new Integer(v1.getLocation()).compareTo(v2.getLocation());
 			}
 		});
@@ -96,8 +92,7 @@ public class Road {
 	/**
 	 * Generates a report of the status of the road.
 	 * 
-	 * @param time
-	 *            current time of the simulation
+	 * @param time current time of the simulation
 	 * @return report of the status of the road
 	 */
 	public String generateReport(int time) {
@@ -133,5 +128,10 @@ public class Road {
 	public void print() {
 		System.out.println("road");
 		System.out.println("id " + id);
+	}
+
+	public void exitVehicle(Vehicle vehicle) {
+		listVehicles.remove(vehicle);
+		
 	}
 }
