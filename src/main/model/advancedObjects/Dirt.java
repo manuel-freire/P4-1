@@ -32,9 +32,4 @@ public class Dirt extends Road{
 			}
 		});
 	}
-	public void print() {
-		System.out.println("dirt");
-		System.out.println("id "+ id);
-		
-	}
 }

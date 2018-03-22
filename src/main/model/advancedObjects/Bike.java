@@ -38,14 +38,4 @@ public class Bike extends Vehicle {
 		String loc = isArrived() ? "arrived" : "(" + getActualRoad().getID() + "," + getLocation() + ")";
 		return "[vehicle_report]\nid = " + getId() + "\ntime = " + time + "\ntype = bike\nspeed = " + this.getActualVel() + "\nkilometrage = " + getKilometrage() + "\nfaulty = " + getBrokenTime() + "\nlocation = " + loc + "\n";
 	}
-	public void print() {
-		System.out.println("bike");
-		System.out.println("id "+ id);
-		System.out.println("Itinerary:");
-		for (int i=0; i<getItinerary().size(); i++) {
-			System.out.print(getItinerary().get(i)+ ",");
-		}
-		System.out.println("max_speed "+maxVel);
-		System.out.println("max_fault_duration "+max_fault_duration);
-	}
 }

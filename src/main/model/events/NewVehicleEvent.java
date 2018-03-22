@@ -19,6 +19,7 @@ public class NewVehicleEvent extends Event{
 	private ArrayList<String> it;
 	private String eventId;
 	private int time;
+	private long seed;
 	
 	public int getTime() {
 		return time;
@@ -38,7 +39,7 @@ public class NewVehicleEvent extends Event{
 			Bike b = new Bike(it,id,max_speed,max_fault_duration);
 			sim.addVehicle(b);
 		} else if(type.equals("car")) {
-			Car c = new Car(id, it, max_speed,max_fault_duration, resistance,0,faultProbability);
+			Car c = new Car(id, it, max_speed,max_fault_duration, resistance,seed,faultProbability);
 			sim.addVehicle(c);
 		} else 
 			throw new NoSuchElementException("The type of vehicle " + type + " doesn't exist");
@@ -59,13 +60,15 @@ public class NewVehicleEvent extends Event{
 			this.it.add(iti[i]);
 		}
 		this.max_speed=Integer.parseInt(sec.getValue("max_speed"));
-		if (type=="bike") {
-			this.max_fault_duration=Integer.parseInt(sec.getValue("max_fault_duration"));
-		} else if(type=="car"){
-			this.faultProbability=Double.parseDouble(sec.getValue("fault_probability"));
-			this.resistance=Integer.parseInt(sec.getValue("resistance"));
-			this.max_fault_duration=Integer.parseInt(sec.getValue("max_fault_duration"));
-		}
+		if(type!=null)
+			if (type.equals("bike")) {
+				this.max_fault_duration=Integer.parseInt(sec.getValue("max_fault_duration"));
+			} else if(type.equals("car")){
+				this.faultProbability=Double.parseDouble(sec.getValue("fault_probability"));
+				this.resistance=Integer.parseInt(sec.getValue("resistance"));
+				this.max_fault_duration=Integer.parseInt(sec.getValue("max_fault_duration"));
+				this.seed=Integer.parseInt(sec.getValue("seed"));
+			}
 	}
 	public void print() {  //Only for testing purposes
 		System.out.println("---");

@@ -38,9 +38,4 @@ public class Lanes extends Road{
 			}
 		});
 	}
-	public void print() {
-		System.out.println("lane");
-		System.out.println("id "+ id);
-		
-	}
 }
