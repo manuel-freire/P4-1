@@ -14,20 +14,15 @@ public class Bike extends Vehicle {
 	 * @param max_speed          maximum speed of the vehicle
 	 * @param max_fault_duration maximum time that the vehicle can be out of order
 	 */
-	private int max_fault_duration;
-	public Bike(List<String> itinerary, String id, int max_speed, int max_fault_duration) {
+	public Bike(List<String> itinerary, String id, int max_speed) {
 		super(max_speed,itinerary,id);
-		this.max_fault_duration = max_fault_duration;
 	}
 	/**
 	 * Sets the faulty timer of the vehicle to the desired number. If it is higher than the maximum allowed it is set to this maximum.
 	 */
 	public void setFaultTime(int brokenTime) {
 		if(this.getActualVel() > this.getMaxVel()/2)
-			if(this.max_fault_duration<brokenTime)
-				this.brokenTime = this.max_fault_duration;
-			else
-				this.brokenTime = brokenTime;
+			this.brokenTime = brokenTime;
 	}
 	/**
 	 * Generates a report of the status of the vehicle.

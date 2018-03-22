@@ -36,7 +36,7 @@ public class NewVehicleEvent extends Event{
 			Vehicle v = new Vehicle(max_speed, it,id);
 			sim.addVehicle(v);
 		} else if (type.equals("bike")) {
-			Bike b = new Bike(it,id,max_speed,max_fault_duration);
+			Bike b = new Bike(it,id,max_speed);
 			sim.addVehicle(b);
 		} else if(type.equals("car")) {
 			Car c = new Car(id, it, max_speed,max_fault_duration, resistance,seed,faultProbability);
@@ -61,35 +61,11 @@ public class NewVehicleEvent extends Event{
 		}
 		this.max_speed=Integer.parseInt(sec.getValue("max_speed"));
 		if(type!=null)
-			if (type.equals("bike")) {
-				this.max_fault_duration=Integer.parseInt(sec.getValue("max_fault_duration"));
-			} else if(type.equals("car")){
+			if(type.equals("car")){
 				this.faultProbability=Double.parseDouble(sec.getValue("fault_probability"));
 				this.resistance=Integer.parseInt(sec.getValue("resistance"));
 				this.max_fault_duration=Integer.parseInt(sec.getValue("max_fault_duration"));
-				this.seed=Integer.parseInt(sec.getValue("seed"));
+				this.seed=Long.parseLong(sec.getValue("seed"));
 			}
-	}
-	public void print() {  //Only for testing purposes
-		System.out.println("---");
-		System.out.println("VEHICLE");
-		System.out.println("Itinerary:");
-		for (int i=0; i<it.size(); i++) {
-			System.out.print(it.get(i)+ ",");
-		}
-		System.out.println("");
-		System.out.println("max_speed "+max_speed);
-		System.out.println("max_fault_duration "+max_fault_duration);
-		if (type=="bike") {
-			System.out.println("bike");
-			System.out.println("id "+id);
-
-		} else {
-			System.out.println("car");
-			System.out.println("id "+id);
-			System.out.println("resistance  "+resistance);
-			System.out.println("fault_probability  "+faultProbability);
-			
-		}
 	}
 }

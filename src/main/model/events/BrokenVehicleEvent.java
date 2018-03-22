@@ -38,12 +38,4 @@ public class BrokenVehicleEvent extends Event{
 		this.time=Integer.parseInt(sec.getValue("time"));
 		this.duration=Integer.parseInt(sec.getValue("duration"));
 	}
-	public void print() {  //Only for testing purposes
-		System.out.println(eventId);
-		System.out.print("Duration, "); System.out.println(duration);
-		System.out.print("Time, "); System.out.println(time);
-		for (int i=0; i<vehicles.size(); i++) {
-			System.out.println(vehicles.get(i));
-		}
-	}
 }

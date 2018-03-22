@@ -46,40 +46,28 @@ public class Car extends Vehicle {
 	 * repaired it might break down.
 	 */
 	public void advance(TrafficSimulator sim) {
-		if (brokenTime <= 0)
-			if (since_fault >= resistance && rand.nextDouble() < faulty_probability) {
-				setFaultTime(rand.nextInt(max_fault_duration) + 1);
-				setActualVel(0);
-			} else {
-				int km = getLocation();
-				setLocation(getLocation() + getActualVel());
-				if (getLocation() >= getActualRoad().getLength()) {
-					setLocation(getActualRoad().getLength());
-					setActualVel(0);
-					if (!isWaiting()) {
-						setWaiting(true);
-						sim.getJunction(getActualRoad().getEndJunction()).enterVehicle(this, getActualRoad().getID());
-					}
-				}
-				since_fault += getKilometrage() + (getLocation() - km);
-				setKilometrage(getKilometrage() + (getLocation() - km));
-			}
-		else {
-			brokenTime--;
+		if (brokenTime <= 0 && since_fault >= resistance && rand.nextDouble() < faulty_probability) {
+			setFaultTime(rand.nextInt(max_fault_duration) + 1);
 			setActualVel(0);
 		}
-	}
-
-	/**
-	 * Sets the time it will be out of order.
-	 * 
-	 * @param fault_time
-	 *            time to be broken down.
-	 */
-	@Override
-	public void setFaultTime(int fault_time) {
-		this.brokenTime = Math.min(fault_time, this.max_fault_duration);
-		this.since_fault = 0;
+		if(brokenTime<=0) {
+			int km = getLocation();
+			setLocation(getLocation() + getActualVel());
+			if (getLocation() >= getActualRoad().getLength()) {
+				setLocation(getActualRoad().getLength());
+				setActualVel(0);
+				if (!isWaiting()) {
+					setWaiting(true);
+					sim.getJunction(getActualRoad().getEndJunction()).enterVehicle(this, getActualRoad().getID());
+				}
+			}
+			since_fault += getLocation() - km;
+			setKilometrage(getKilometrage() + (getLocation() - km));
+		} else {
+			brokenTime--;
+			setActualVel(0);
+			since_fault = 0;
+		}
 	}
 
 	/**

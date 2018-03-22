@@ -76,17 +76,17 @@ public class Road {
 	public void advance(TrafficSimulator sim) {
 		int reduction_factor = 1;
 		int base_speed = Math.min(max_speed,max_speed/ Math.max(listVehicles.size(), 1)+1);
+		Collections.sort(listVehicles, new Comparator<Vehicle>() {
+			public int compare(Vehicle v2, Vehicle v1) {
+				return new Integer(v1.getLocation()).compareTo(v2.getLocation());
+			}
+		});
 		for (Vehicle v : listVehicles) {
 			if(v.isOutOfOrder())
 				reduction_factor = 2;
 			v.setActualVel((int) base_speed / reduction_factor);
 			v.advance(sim);
 		}
-		Collections.sort(listVehicles, new Comparator<Vehicle>() {
-			public int compare(Vehicle v2, Vehicle v1) {
-				return new Integer(v1.getLocation()).compareTo(v2.getLocation());
-			}
-		});
 	}
 
 	/**

@@ -8,7 +8,6 @@ import main.model.TrafficSimulator;
 public abstract class Event {
 	public abstract Event parser(String id);
 	public abstract void builder(IniSection sec);
-	public abstract void print();
 	public abstract void execute(TrafficSimulator sim);
 	public abstract int getTime();
 }

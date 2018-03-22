@@ -36,10 +36,4 @@ public class NewJunctionEvent extends Event {
 		junctionId=sec.getValue("id");
 		this.time=Integer.parseInt(sec.getValue("time"));
 	}
-	public void print() {  //Only for testing purposes
-		System.out.println("---");
-		System.out.println("JUNCTION");
-		System.out.print("Time, "); System.out.println(getTime());
-		System.out.print("JunctionID, "); System.out.println(junctionId);
-	}
 }
