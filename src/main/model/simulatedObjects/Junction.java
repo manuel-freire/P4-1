@@ -57,6 +57,9 @@ public class Junction {
 	 * Moves the vehicles that can advance to the next road.
 	 */
 	public void advance(TrafficSimulator sim) {
+		green++;
+		if(green >= roads.size())
+			green = 0;
 		if(queues.size()!=0) {
 			if(!queues.get(green).isEmpty()) {
 				Vehicle v = queues.get(green).get(0);
@@ -65,9 +68,6 @@ public class Junction {
 					while(queues.get(green).remove(v)) {} 
 			}
 		}
-		green++;
-		if(green >= roads.size())
-			green = 0;
 	}
 	/**
 	 * Generates a report of the status of the road.
@@ -82,7 +82,7 @@ public class Junction {
 		 */
 		String queuesString = new String();
 		for(int i = 0; i < roads.size(); i++) {
-			queuesString += "(" + roads.get(i) + ((i == green)? ",green" : ",red") + ",[";
+			queuesString += "(" + roads.get(i) + ((i == getPrev(green))? ",green" : ",red") + ",[";
 			for(int t = 0; t < queues.get(i).size(); t++) {
 				queuesString += queues.get(i).get(t).getID();
 				if(t < queues.get(i).size()-1)
@@ -98,5 +98,11 @@ public class Junction {
 		System.out.println("Junction");
 		System.out.println("id "+ id);
 		
+	}
+	private int getPrev(int i) {
+		if(i == 0)
+			return this.queues.size()-1;
+		else
+			return i-1;
 	}
 }

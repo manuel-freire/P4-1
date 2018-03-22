@@ -1,5 +1,8 @@
 package main.model.advancedObjects;
 
+import java.util.Collections;
+import java.util.Comparator;
+
 import main.model.TrafficSimulator;
 import main.model.simulatedObjects.Road;
 import main.model.simulatedObjects.Vehicle;
@@ -29,6 +32,11 @@ public class Lanes extends Road{
 			v.advance(sim);
 			reduction_factor += (v.isOutOfOrder()) ? 1 : 0;
 		}
+		Collections.sort(listVehicles, new Comparator<Vehicle>() {
+			public int compare(Vehicle v2, Vehicle v1) {
+				return new Integer(v1.getLocation()).compareTo(v2.getLocation());
+			}
+		});
 	}
 	public void print() {
 		System.out.println("lane");

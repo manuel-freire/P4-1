@@ -8,7 +8,7 @@ import main.model.TrafficSimulator;
 import main.model.simulatedObjects.Vehicle;
 
 public class Road {
-	private ArrayList<Vehicle> listVehicles = new ArrayList<>();
+	protected ArrayList<Vehicle> listVehicles = new ArrayList<>();
 	private int length, max_speed;
 	protected String id;
 	private String dest, src;
@@ -76,11 +76,11 @@ public class Road {
 	public void advance(TrafficSimulator sim) {
 		int reduction_factor = 1;
 		int base_speed = Math.min(max_speed,max_speed/ Math.max(listVehicles.size(), 1)+1);
-		for (int i = 0; i < listVehicles.size(); i++) {
-			if(listVehicles.get(i).isOutOfOrder())
+		for (Vehicle v : listVehicles) {
+			if(v.isOutOfOrder())
 				reduction_factor = 2;
-			listVehicles.get(i).setActualVel((int) base_speed / reduction_factor);
-			listVehicles.get(i).advance(sim);
+			v.setActualVel((int) base_speed / reduction_factor);
+			v.advance(sim);
 		}
 		Collections.sort(listVehicles, new Comparator<Vehicle>() {
 			public int compare(Vehicle v2, Vehicle v1) {

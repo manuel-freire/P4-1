@@ -15,6 +15,7 @@ public class Vehicle {
 	private boolean arrived;
 	protected String id;
 	protected int brokenTime;
+	private boolean waiting;
 	
 	/**
 	 * Constructs a vehicle with its desired behaviour.
@@ -29,8 +30,9 @@ public class Vehicle {
 		this.id=id;
 		this.arrived = false;
 		this.location =0;
+		this.setWaiting(false);
 	}
-	
+
 	/**
 	 * Returns the road that is travelling through.
 	 * 
@@ -115,23 +117,23 @@ public class Vehicle {
 	 * Updates the vehicle's position in the road. If it has reached the end of the road it enters the junction and exits from the road.
 	 * @return 
 	 */
-	public boolean advance(TrafficSimulator sim) {
-		boolean exits = false;
+	public void advance(TrafficSimulator sim) {
 		if(brokenTime <= 0) {
 			int km = location;
 			location += actualVel;
 			if(location>=actualRoad.getLength()) {
 				location = actualRoad.getLength();
-				exits = true;
 				actualVel = 0;
-				sim.getJunction(actualRoad.getEndJunction()).enterVehicle(this,actualRoad.getID());
+				if(!isWaiting()) {
+					setWaiting(true);
+					sim.getJunction(actualRoad.getEndJunction()).enterVehicle(this,actualRoad.getID());
+				}
 			}
 			kilometrage += location-km;
 		}else {
 			brokenTime--;
 			this.actualVel = 0;
 		}
-		return exits;
 	}
 	/**
 	 * Advances to the next road.
@@ -149,6 +151,7 @@ public class Vehicle {
 			Road r = sim.getRoad(getItinerary().get(0),getItinerary().get(1));
 			actualRoad = r;
 			r.entersVehicle(this);
+			setWaiting(false);
 		}
 	}
 	/**
@@ -183,5 +186,13 @@ public class Vehicle {
 
 	public void setItinerary(List<String> itinerary) {
 		this.itinerary = itinerary;
+	}
+
+	public boolean isWaiting() {
+		return waiting;
+	}
+
+	public void setWaiting(boolean waiting) {
+		this.waiting = waiting;
 	}
 }
