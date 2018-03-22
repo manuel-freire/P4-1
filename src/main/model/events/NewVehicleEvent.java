@@ -3,6 +3,7 @@ import java.io.BufferedReader;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 
 import es.ucm.fdi.ini.IniSection;
 import main.model.TrafficSimulator;
@@ -30,16 +31,17 @@ public class NewVehicleEvent extends Event{
 		it=new ArrayList<String>();
 	}
 	public void execute(TrafficSimulator sim) {
-		if (type=="bike") {
-			Bike b = new Bike(it,id,max_speed,max_fault_duration);
-			sim.addVehicle(b);
-		} else if(type=="car") {
-			Car c = new Car(id, it, max_speed,max_fault_duration, resistance,0,faultProbability);
-			sim.addVehicle(c);
-		} else {
+		if(type == null){
 			Vehicle v = new Vehicle(max_speed, it,id);
 			sim.addVehicle(v);
-		}
+		} else if (type.equals("bike")) {
+			Bike b = new Bike(it,id,max_speed,max_fault_duration);
+			sim.addVehicle(b);
+		} else if(type.equals("car")) {
+			Car c = new Car(id, it, max_speed,max_fault_duration, resistance,0,faultProbability);
+			sim.addVehicle(c);
+		} else 
+			throw new NoSuchElementException("The type of vehicle " + type + " doesn't exist");
 	}
 	public Event parser(String id){
 		if (eventId.equals(id)) {

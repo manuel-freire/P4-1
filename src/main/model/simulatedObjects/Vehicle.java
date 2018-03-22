@@ -28,7 +28,7 @@ public class Vehicle {
 		this.maxVel = maxVel;
 		this.setItinerary(itinerary);
 		this.id=id;
-		this.arrived = false;
+		this.setArrived(false);
 		this.location =0;
 		this.setWaiting(false);
 	}
@@ -144,8 +144,8 @@ public class Vehicle {
 		this.location = 0;
 		actualRoad.exitVehicle(this);
 		if(getItinerary().size() < 2) {
-			assert(arrived==true);
-			arrived  = true;
+			assert(isArrived()==true);
+			setArrived(true);
 		}
 		else {
 			Road r = sim.getRoad(getItinerary().get(0),getItinerary().get(1));
@@ -160,7 +160,7 @@ public class Vehicle {
 	 * @return String of the report
 	 */
 	public String generateReport(int time) {
-		String loc = arrived ? "arrived" : "(" + actualRoad.getID() + "," + location + ")";
+		String loc = isArrived() ? "arrived" : "(" + actualRoad.getID() + "," + location + ")";
 		return "[vehicle_report]\nid = " + getId() + "\ntime = " + time + "\nspeed = " + this.actualVel +  "\nkilometrage = " + getKilometrage() + "\nfaulty = " + getBrokenTime() + "\nlocation = " + loc + "\n";
 	}
 
@@ -194,5 +194,13 @@ public class Vehicle {
 
 	public void setWaiting(boolean waiting) {
 		this.waiting = waiting;
+	}
+
+	public boolean isArrived() {
+		return arrived;
+	}
+
+	public void setArrived(boolean arrived) {
+		this.arrived = arrived;
 	}
 }

@@ -35,7 +35,8 @@ public class Bike extends Vehicle {
 	 * @return String of the report
 	 */
 	public String generateReport(int time) {
-		return "[Vehicle report]\n id = " + getId() + "\n time = " + time + "\n kilometrage = " + getKilometrage() + "\n (" + getActualRoad().getID() + "," + getLocation() + ")" + "/n type = bike";
+		String loc = isArrived() ? "arrived" : "(" + getActualRoad().getID() + "," + getLocation() + ")";
+		return "[vehicle_report]\nid = " + getId() + "\ntime = " + time + "\ntype = bike\nspeed = " + this.getActualVel() + "\nkilometrage = " + getKilometrage() + "\nfaulty = " + getBrokenTime() + "\nlocation = " + loc + "\n";
 	}
 	public void print() {
 		System.out.println("bike");

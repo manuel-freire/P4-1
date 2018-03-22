@@ -60,7 +60,9 @@ public class Car extends Vehicle {
 	 * @param time time passed from the start of the simulation
 	 * @return String of the report
 	 */
+	@Override
 	public String generateReport(int time) {
-		return "[Vehicle report]\n id = " + getId() + "\n time = " + time + "\n kilometrage = " + getKilometrage() + "\n (" + getActualRoad().getID() + "," + getLocation() + ")"  + "/n type = car";
+		String loc = isArrived() ? "arrived" : "(" + getActualRoad().getID() + "," + getLocation() + ")";
+		return "[vehicle_report]\nid = " + getId() + "\ntime = " + time + "\ntype = car\nspeed = " + this.getActualVel() + "\nkilometrage = " + getKilometrage() + "\nfaulty = " + getBrokenTime() + "\nlocation = " + loc + "\n";
 	}
 }
