@@ -7,7 +7,7 @@ import main.model.simulatedObjects.Junction;
 import main.model.simulatedObjects.Vehicle;
 
 public class RoundRobin extends Junction {
-	private int max_time_slice, min_time_slice, last;
+	private int max_time_slice, min_time_slice, last, last_green;
 	private int interval, time_spent, passed;
 
 	public RoundRobin(String id, int max_time_slice, int min_time_slice) {
@@ -43,13 +43,11 @@ public class RoundRobin extends Junction {
 			if (green >= roads.size())
 				green = 0;
 			passed = 0;
-			last = interval;
-		}else {
-			this.last = interval - time_spent;
-			if(!queues.get(green).isEmpty()) {
-				queues.get(green).get(0).advanceToNextRoad(sim);
-				passed++;
-			}
+		}
+		this.last = interval - time_spent;
+		if(!queues.get(green).isEmpty()) {
+			queues.get(green).get(0).advanceToNextRoad(sim);
+			passed++;
 		}
 	}
 
@@ -61,7 +59,7 @@ public class RoundRobin extends Junction {
 	public String generateReport(int time) {
 		String queuesString = new String();
 		for (int i = 0; i < roads.size(); i++) {
-			queuesString += "(" + roads.get(i) + ((i == getPrev(green)) ?",green:" + (last) : ",red:")
+			queuesString += "(" + roads.get(i) + ((i == green) ?",green:" + (last) : ",red:")
 					+ ",[";
 			for (int t = 0; t < queues.get(i).size(); t++) {
 				queuesString += queues.get(i).get(t).getID();
