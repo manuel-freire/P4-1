@@ -151,35 +151,10 @@ public class TrafficSimulator {
 					v.setFaultTime(duration);
 				}
 	}
-	
-	// Testing
-	public ArrayList<Junction> getJunctions() {
-		return junctions;
-	}
-	public ArrayList<Road> getRoads() {
-		return roads;
-	}
-	public ArrayList<Vehicle> getVehicles() {
-		return vehicles;
-	}
-	public ArrayList<Event> getEvents() {
-		return events;
-	}
 	public int getActualTick() {
 		return actualTick;
 	}
 	public int getTotalTicks() {
 		return totalTicks;
-	}
-	//Testing
-	public void printJunctions() {
-		for (int i=0; i<junctions.size(); i++) {
-			junctions.get(i).print();
-		}
-	}
-	public void printRoads() {
-		for (int i=0; i<roads.size(); i++) {
-			roads.get(i).print();
-		}
 	}
 }

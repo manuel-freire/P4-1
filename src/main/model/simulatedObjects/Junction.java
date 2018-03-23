@@ -1,21 +1,14 @@
 package main.model.simulatedObjects;
 
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
 import main.model.TrafficSimulator;
 
-import java.util.NoSuchElementException;
-import java.util.Set;
-
 public class Junction {
-	private ArrayList<ArrayList<Vehicle>> queues;
-	private ArrayList<String> roads;
-	private int green;
-	private String id;
+	protected ArrayList<ArrayList<Vehicle>> queues;
+	protected ArrayList<String> roads;
+	protected int green;
+	protected String id;
 	
 	/**
 	 * Class constructor.
@@ -25,7 +18,7 @@ public class Junction {
 		queues = new ArrayList<ArrayList<Vehicle>>();
 		roads = new ArrayList<String>();
 		green = 0;
-		this.id=id;
+		this.id = id;
 	}
 	
 	/**
@@ -94,12 +87,7 @@ public class Junction {
 		}
 		return "[junction_report]\nid = " + id + "\ntime = " + time + "\nqueues = " + queuesString + "\n";
 	}
-	public void print() {
-		System.out.println("Junction");
-		System.out.println("id "+ id);
-		
-	}
-	private int getPrev(int i) {
+	protected int getPrev(int i) {
 		if(i == 0)
 			return this.queues.size()-1;
 		else
