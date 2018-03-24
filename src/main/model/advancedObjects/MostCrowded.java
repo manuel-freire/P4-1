@@ -7,7 +7,7 @@ import main.model.simulatedObjects.Junction;
 import main.model.simulatedObjects.Vehicle;
 
 public class MostCrowded extends Junction{
-	private int interval, time_spent, last_green;
+	private int interval, time_spent;
 	private int last;
 	public MostCrowded(String id) {
 		super(id);
@@ -47,6 +47,7 @@ public class MostCrowded extends Junction{
 	}
 	/**
 	 * Generates a report of the status of the road.
+	 * 
 	 * @param time current time of the simulation.
 	 */
 	public String generateReport(int time) {

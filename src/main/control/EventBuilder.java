@@ -2,12 +2,9 @@ package main.control;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import es.ucm.fdi.ini.Ini;
-import es.ucm.fdi.ini.IniSection;
+import main.ini.*;
 import main.model.events.*;
 
 public class EventBuilder {
