@@ -32,11 +32,6 @@ public class Dirt extends Road{
 			reduction_factor += (v.isOutOfOrder()) ? 1 : 0;
 		}
 	}
-	/**
-	 * Generates a report of the status of the dirt road.
-	 * @param time time passed from the start of the simulation
-	 * @return String of the report
-	 */
 	@Override
 	public String generateReport(int time) {
 		/*

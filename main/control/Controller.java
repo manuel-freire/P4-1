@@ -2,7 +2,6 @@ package main.control;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import main.model.TrafficSimulator;
@@ -18,12 +17,8 @@ public class Controller {
 	 * @param output path to input file
 	 * @param ticks number of iterations for the simulation
 	 */
-	public Controller(String input, String output, int ticks) throws IOException {
-		try {
-		evBuilder = new EventBuilder(input); }
-		catch (IOException e) {
-			throw e;
-		}
+	public Controller(String input, String output, int ticks) {
+		evBuilder = new EventBuilder(input);
 		this.output=output;
 		ArrayList<Event> eventList = evBuilder.Builder();
 		simulator = new TrafficSimulator(ticks);

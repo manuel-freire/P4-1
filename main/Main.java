@@ -2,13 +2,9 @@ package main;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.FilenameFilter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
@@ -19,7 +15,6 @@ import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
 import main.ini.*;
-import main.model.events.Event;
 import main.control.*;
 
 // COGIDO DEL EJEMPLO
@@ -181,13 +176,9 @@ public class Main {
 	 * @throws IOException if the files couldn't be opened
 	 */
 	private static void startBatchMode() throws IOException {
-		Controller controller;
-		try {controller = new Controller(_inFile, _outFile,_timeLimit); }
-		catch (IOException e) {
-			throw e;
-			}
+		Controller controller = new Controller(_inFile, _outFile,_timeLimit);
 		controller.run();
-		}
+	}
 	/**
 	 * Parses the commands and calls the startBatchMode method.
 	 * @param args commands provided
@@ -195,11 +186,7 @@ public class Main {
 	 */
 	private static void start(String[] args) throws IOException {
 		parseArgs(args);
-		try {
-		startBatchMode(); }
-		catch (IOException e) {
-			throw e;
-		}
+		startBatchMode();
 	}
 	
 
@@ -216,19 +203,10 @@ public class Main {
 
 		// Call test in order to test the simulator on all examples in a directory.
 		//
-		try {
-		test("/src/resources/examples/advanced"); 
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
+		test("/src/resources/examples/advanced");
+		
 		// Call start to start the simulator from command line, etc.
-		try {
-			start(args);
-		} catch (IOException e) {
-			System.out.println("File not found, terminating program");
-		}
-
+		start(args);
 	}
 }
 
