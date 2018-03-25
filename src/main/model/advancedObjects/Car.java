@@ -4,29 +4,24 @@ import java.util.ArrayList;
 import java.util.Random;
 import main.model.TrafficSimulator;
 import main.model.simulatedObjects.Vehicle;
-
+/**
+ * Car class. Extends Vehicle.
+ * @author Borja Lozano
+ */
 public class Car extends Vehicle {
 	private int resistance, since_fault, max_fault_duration;
 	private double faulty_probability;
 	private Random rand;
 
 	/**
-	 * Class constructor
-	 * 
-	 * @param id
-	 *            identification of the vehicle
-	 * @param itinerary
-	 *            collection of junctions to go by
-	 * @param max_speed
-	 *            maximum speed of the vehicle
-	 * @param max_fault_duration
-	 *            maximum time the vehicle can be out of order
-	 * @param resistance
-	 *            resistance in km to start breaking down after being repaired
-	 * @param seed
-	 *            seed of the random number generator
-	 * @param fault_probability
-	 *            probability to break down
+	 * Class constructor.
+	 * @param id identification
+	 * @param itinerary itinerary
+	 * @param max_speed max speed
+	 * @param max_fault_duration max fault duration
+	 * @param resistance resistance
+	 * @param seed seed
+	 * @param faulty_probability probability to have a fault
 	 */
 	public Car(String id, ArrayList<String> itinerary, int max_speed, int max_fault_duration, int resistance, long seed,
 			double faulty_probability) {
@@ -44,6 +39,7 @@ public class Car extends Vehicle {
 	/**
 	 * Advances the vehicle. If it has advanced more than the resistance since being
 	 * repaired it might break down.
+	 * @param sim simulation
 	 */
 	public void advance(TrafficSimulator sim) {
 		if (brokenTime <= 0 && since_fault >= resistance && rand.nextDouble() < faulty_probability) {

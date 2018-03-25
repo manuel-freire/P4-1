@@ -7,6 +7,10 @@ import java.util.List;
 import main.ini.*;
 import main.model.events.*;
 
+/**
+ * Builds the event list.
+ * @author Javier Navalon
+ */
 public class EventBuilder {
 	Event[] parser= {new NewJunctionEvent(), new NewRoadEvent(), new NewVehicleEvent(), new BrokenVehicleEvent()};
 	String fileName;

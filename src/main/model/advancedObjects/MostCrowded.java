@@ -5,16 +5,22 @@ import java.util.ArrayList;
 import main.model.TrafficSimulator;
 import main.model.simulatedObjects.Junction;
 import main.model.simulatedObjects.Vehicle;
-
+/**
+ * Crowded junction class. Extends Junction.
+ * @author Borja Lozano
+ */
 public class MostCrowded extends Junction{
 	private int interval, time_spent;
 	private int last;
+	/**
+	 * Class constructor.
+	 * @param id identification
+	 */
 	public MostCrowded(String id) {
 		super(id);
 		this.time_spent = -1;
 		this.green = -1;
 	}
-	
 	public void advance(TrafficSimulator sim) {
 		if(roads.isEmpty())
 			return;

@@ -9,6 +9,12 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Class of a IniSection. Stores a list of keys and matching values.
+ *
+ * @author Samir Genaim genaim@gmail.com
+ *
+ */
 public class IniSection {
 
 	/**
@@ -83,8 +89,8 @@ public class IniSection {
 	/**
 	 * Adds a comment to be printed just before the line corresponding to key.
 	 * 
-	 * @param key
-	 * @param comment
+	 * @param key the key
+	 * @param comment the comment
 	 */
 	public void addKeyComment(String key, String comment) {
 		if (getValue(key) != null) {
@@ -95,8 +101,7 @@ public class IniSection {
 	/**
 	 * Adds a comment to be printed just before the the section
 	 * 
-	 * @param key
-	 * @param comment
+	 * @param comment the comment
 	 */
 	public void addSectionComment(String comment) {
 		_comments.get("").add(comment);
@@ -112,7 +117,11 @@ public class IniSection {
 	public String getValue(String key) {
 		return _attr.get(key);
 	}
-
+	/**
+	 * Returns the matching comments.
+	 * @param key key
+	 * @return comments
+	 */
 	public List<String> getKeyComments(String key) {
 		checkKeyValidity(key);
 		return _comments.get(key);
@@ -123,7 +132,7 @@ public class IniSection {
 	 * 
 	 * @param out
 	 *            An output stream to which the section to be wirtten
-	 * @throws IOException
+	 * @throws IOException if it can't read the file
 	 */
 	public void store(OutputStream out) throws IOException {
 		out.write(toString().getBytes());
@@ -139,8 +148,8 @@ public class IniSection {
 	}
 
 	/**
-	 * 
-	 * @return
+	 * Returns the keys
+	 * @return keys
 	 */
 	public List<String> getKeys() {
 		return Collections.unmodifiableList(_keys);
@@ -149,6 +158,7 @@ public class IniSection {
 	/**
 	 * To be equal they must have the same keys, the order is not important, and
 	 * value of all keys are equal.
+	 * @param obj objects
 	 */
 	@Override
 	public boolean equals(Object obj) {

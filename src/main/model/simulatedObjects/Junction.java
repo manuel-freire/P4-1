@@ -3,7 +3,10 @@ package main.model.simulatedObjects;
 import java.util.ArrayList;
 
 import main.model.TrafficSimulator;
-
+/**
+ * Junction class.
+ * @author Borja Lozano
+ */
 public class Junction {
 	protected ArrayList<ArrayList<Vehicle>> queues;
 	protected ArrayList<String> roads;
@@ -40,7 +43,7 @@ public class Junction {
 	/**
 	 * Enters a vehicle in the junction.
 	 * @param vehicle vehicle to be included
-	 * @param r road it came from
+	 * @param road_id identification of the road it came from
 	 */
 	public void enterVehicle(Vehicle vehicle, String road_id) {
 		int i = roads.indexOf(road_id);
@@ -48,6 +51,7 @@ public class Junction {
 	}
 	/**
 	 * Moves the vehicles that can advance to the next road.
+	 * @param sim simulator
 	 */
 	public void advance(TrafficSimulator sim) {
 		green++;
@@ -65,6 +69,7 @@ public class Junction {
 	/**
 	 * Generates a report of the status of the road.
 	 * @param time current time of the simulation.
+	 * @return report
 	 */
 	public String generateReport(int time) {
 		/*

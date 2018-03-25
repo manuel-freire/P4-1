@@ -6,21 +6,24 @@ import java.util.List;
 
 import main.ini.IniSection;
 import main.model.TrafficSimulator;
-
+/**
+ * Class of the event that breaks vehicles.
+ * @author Javier Navalon
+ *
+ */
 public class BrokenVehicleEvent extends Event{
 	private int duration, time;
 	private List<String> vehicles;
 	private String eventId;
-	
-	public int getTime() {
-		return time;
-	}
-	public void setTime(int time) {
-		this.time = time;
-	}
+	/**
+	 * Class constructor.
+	 */
 	public BrokenVehicleEvent() {
 		eventId="make_vehicle_faulty";
 		vehicles=new ArrayList<String>();
+	}
+	public int getTime() {
+		return time;
 	}
 	public void execute(TrafficSimulator sim) {
 		sim.breakVehicles(vehicles,duration);

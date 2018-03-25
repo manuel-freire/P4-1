@@ -7,7 +7,11 @@ import main.model.TrafficSimulator;
 import main.model.advancedObjects.MostCrowded;
 import main.model.advancedObjects.RoundRobin;
 import main.model.simulatedObjects.Junction;
-
+/**
+ * Class of the event that creates a new junction.
+ * @author Javier Navalon
+ *
+ */
 public class NewJunctionEvent extends Event {
 	private String junctionId;
 	private String eventId;
@@ -17,9 +21,6 @@ public class NewJunctionEvent extends Event {
 	private int min_time_slice;
 	public int getTime() {
 		return time;
-	}
-	public void setTime(int time) {
-		this.time = time;
 	}
 	public NewJunctionEvent() {
 		eventId="new_junction";

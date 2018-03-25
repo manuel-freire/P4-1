@@ -8,6 +8,10 @@ import java.util.NoSuchElementException;
 import main.model.TrafficSimulator;
 import main.model.events.Event;
 
+/**
+ * Controller of the simulator. Reads the events and runs the simulation.
+ * @author Borja Lozano
+ */
 public class Controller {
 	private String output;
 	private TrafficSimulator simulator;

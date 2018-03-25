@@ -5,11 +5,20 @@ import java.util.ArrayList;
 import main.model.TrafficSimulator;
 import main.model.simulatedObjects.Junction;
 import main.model.simulatedObjects.Vehicle;
-
+/**
+ * Round junction class. Extends Junction.
+ * @author Borja Lozano
+ */
 public class RoundRobin extends Junction {
 	private int max_time_slice, min_time_slice, last;
 	private int interval, time_spent, passed;
-
+	
+	/**
+	 * Class constructor.
+	 * @param id              identification
+	 * @param max_time_slice  max number of ticks one traffic light can be green
+	 * @param min_time_slice  min number of ticks one traffic light can be green
+	 */
 	public RoundRobin(String id, int max_time_slice, int min_time_slice) {
 		super(id);
 		this.max_time_slice = max_time_slice;
@@ -27,7 +36,6 @@ public class RoundRobin extends Junction {
 		queues.add(new ArrayList<Vehicle>());
 		interval = max_time_slice;
 	}
-
 	public void advance(TrafficSimulator sim) {
 		if(roads.isEmpty())
 			return;

@@ -17,7 +17,12 @@ import org.apache.commons.cli.ParseException;
 import main.ini.*;
 import main.control.*;
 
-
+/**
+ * IniError class.
+ *
+ * @author Samir Genaim genaim@gmail.com
+ * @author Borja Lozano (Slight modifications)
+ */
 public class Main {
 	
 	private final static Integer _timeLimitDefaultValue = 10;
@@ -111,7 +116,7 @@ public class Main {
 	}
 	/**
 	 * Parser for the steps option. Sets the steps of the simulation if successful.
-	 * @param line
+	 * @param line line
 	 * @throws ParseException if the steps provided is invalid
 	 */
 	private static void parseStepsOption(CommandLine line) throws ParseException {
@@ -130,7 +135,7 @@ public class Main {
 	 * example "example.ini" the expected output is stored in "example.ini.eout".
 	 * The simulator's output will be stored in "example.ini.out"
 	 * 
-	 * @throws IOException
+	 * @throws IOException if the file doesn't exists
 	 */
 	private static void test(String path) throws IOException {
 
@@ -154,10 +159,10 @@ public class Main {
 	}
 	/**
 	 * Tests an example.
-	 * @param inFile 
-	 * @param outFile
-	 * @param expectedOutFile
-	 * @param timeLimit
+	 * @param inFile input file
+	 * @param outFile output file
+	 * @param expectedOutFile expected output file
+	 * @param timeLimit time limit
 	 * @throws IOException if the reading is unsuccessful
 	 */
 	private static void test(String inFile, String outFile, String expectedOutFile, int timeLimit) throws IOException {
@@ -189,13 +194,16 @@ public class Main {
 		startBatchMode();
 	}
 	
-
-	public static void main(String[] args) throws IOException, InvocationTargetException, InterruptedException {
+	/**
+	 * Main method.
+	 * @param args arguments
+	 */
+	public static void main(String[] args) {
 		// Call test in order to test the simulator on all examples in a directory.
-		test("/src/resources/examples/basic");
-		test("/src/resources/examples/advanced");
-		test("/src/resources/examples/err");
 		try {
+			test("/src/resources/examples/basic");
+			test("/src/resources/examples/advanced");
+			test("/src/resources/examples/err");
 			start(args);
 		} catch(IOException e) {
 			System.out.println(e.getMessage());

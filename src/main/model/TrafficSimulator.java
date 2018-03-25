@@ -8,14 +8,20 @@ import java.util.NoSuchElementException;
 
 import main.model.events.Event;
 import main.model.simulatedObjects.*;
-
+/**
+ * Class that sets up the simulator and runs it. Stores the list of events and executes them.
+ * @author Borja Lozano
+ */
 public class TrafficSimulator {
 	private ArrayList<Junction> junctions;
 	private ArrayList<Road> roads;
 	private ArrayList<Vehicle> vehicles;
 	private ArrayList<Event> events;
 	int actualTick, totalTicks;
-	
+	/**
+	 * Class constructor.
+	 * @param ticks number of ticks
+	 */
 	public TrafficSimulator(int ticks) {
 		events=new ArrayList<Event>();
 		junctions=new ArrayList<Junction>();
@@ -26,6 +32,7 @@ public class TrafficSimulator {
 	}
 	/**
 	 * Starts the simulation.
+	 * @param ostream file outstream
 	 */
 	public void execute(FileOutputStream ostream) {
 		int limiteTiempo = this.actualTick + totalTicks - 1; 
@@ -62,8 +69,8 @@ public class TrafficSimulator {
 	}
 	/**
 	 * Returns the road that matches the source junction and destination junction
-	 * @param road_id
-	 * @param end_id
+	 * @param src_id source junction
+	 * @param end_id end junction
 	 * @return road that matches the parameters
 	 */
 	public Road getRoad(String src_id, String end_id) {
@@ -78,9 +85,9 @@ public class TrafficSimulator {
 	}
 	/**
 	 * Returns the junction that matches the id.
-	 * @param id
+	 * @param id identification of the junction
 	 * @return junction that matches the id
-	 * @throws NoSuchElementException
+	 * @throws NoSuchElementException if the junction can't be found
 	 */
 	public Junction getJunction(String id) throws NoSuchElementException {
 		Junction jun = null;
@@ -141,8 +148,8 @@ public class TrafficSimulator {
 	}
 	/**
 	 * Sets the broken down duration of every desired vehicle to the one provided.
-	 * @param vehicles2 
-	 * @param duration 
+	 * @param vehicles2 vehicles to be broken
+	 * @param duration duration
 	 */
 	public void breakVehicles(List<String> vehicles2, int duration) {
 		for(String id : vehicles2)
@@ -150,11 +157,5 @@ public class TrafficSimulator {
 				if(v.getID().equals(id)) {
 					v.setFaultTime(duration);
 				}
-	}
-	public int getActualTick() {
-		return actualTick;
-	}
-	public int getTotalTicks() {
-		return totalTicks;
 	}
 }

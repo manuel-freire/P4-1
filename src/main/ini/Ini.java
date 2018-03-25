@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
 /**
  * A parser/generator of INI files.
  *
- * @author Samir Genaim <genaim@gmail.com>
+ * @author Samir Genaim genaim@gmail.com
  *
  */
 public class Ini {
@@ -67,8 +67,7 @@ public class Ini {
 	/**
 	 * Construct an INI structure from a file
 	 * 
-	 * @param is
-	 *            A filename from which the INI structure is read
+	 * @param path path to file
 	 * @throws IOException
 	 *             Exceptions thrown when reading from the input file
 	 */

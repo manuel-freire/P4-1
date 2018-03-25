@@ -6,9 +6,19 @@ import java.util.Comparator;
 import main.model.TrafficSimulator;
 import main.model.simulatedObjects.Road;
 import main.model.simulatedObjects.Vehicle;
-
+/**
+ * Dirt road class. Extends Road.
+ * @author Borja Lozano
+ */
 public class Dirt extends Road{
-
+	/**
+	 * Class constructor.
+	 * @param id        identification
+	 * @param src       source junction
+	 * @param dest      destination junction
+	 * @param max_speed maximum speed 
+	 * @param length    length of the road
+	 */
 	public Dirt(String id, String src, String dest, int max_speed, int length) {
 		super(id, src, dest, max_speed, length);
 	}

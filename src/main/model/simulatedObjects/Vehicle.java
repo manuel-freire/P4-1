@@ -3,7 +3,10 @@ package main.model.simulatedObjects;
 import java.util.List;
 
 import main.model.TrafficSimulator;
-
+/**
+ * Vehicle class.
+ * @author Borja Lozano
+ */
 public class Vehicle {
 	private int actualVel;
 	protected int maxVel;
@@ -19,7 +22,6 @@ public class Vehicle {
 	/**
 	 * Constructs a vehicle with its desired behaviour.
 	 * @param maxVel       maximum velocity it can have
-	 * @param maxBreakTime maximum time it can be broken down
 	 * @param itinerary    collection of junctions it has to go through
 	 * @param id           identification of the vehicle
 	 */
@@ -114,7 +116,7 @@ public class Vehicle {
 	 
 	/**
 	 * Updates the vehicle's position in the road. If it has reached the end of the road it enters the junction and exits from the road.
-	 * @return 
+	 * @param sim simulation
 	 */
 	public void advance(TrafficSimulator sim) {
 		if(brokenTime <= 0) {
@@ -136,6 +138,7 @@ public class Vehicle {
 	}
 	/**
 	 * Advances to the next road.
+	 * @param sim simulation
 	 */
 	public void advanceToNextRoad(TrafficSimulator sim) {
 		getItinerary().remove(0);

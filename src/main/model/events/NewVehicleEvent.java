@@ -8,7 +8,11 @@ import main.model.advancedObjects.Bike;
 import main.model.advancedObjects.Car;
 import main.model.simulatedObjects.Vehicle;
 import main.ini.*;
-
+/**
+ * Class of the event that creates a new vehicle.
+ * @author Javier Navalon
+ *
+ */
 public class NewVehicleEvent extends Event{
 	private String id, type;
 	private int max_speed, resistance, 
@@ -21,9 +25,6 @@ public class NewVehicleEvent extends Event{
 	
 	public int getTime() {
 		return time;
-	}
-	public void setTime(int time) {
-		this.time = time;
 	}
 	public NewVehicleEvent() {
 		eventId="new_vehicle";

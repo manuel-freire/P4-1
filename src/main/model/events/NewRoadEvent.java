@@ -7,7 +7,11 @@ import main.model.TrafficSimulator;
 import main.model.advancedObjects.Dirt;
 import main.model.advancedObjects.Lanes;
 import main.model.simulatedObjects.Road;
-
+/**
+ * Class of the event that creates a new road.
+ * @author Javier Navalon
+ *
+ */
 public class NewRoadEvent extends Event{
 	String src, dest, id, type;
 	int max_speed, length, lanes;
@@ -15,9 +19,6 @@ public class NewRoadEvent extends Event{
 	private int time;
 	public int getTime() {
 		return time;
-	}
-	public void setTime(int time) {
-		this.time = time;
 	}
 	public NewRoadEvent() {
 		eventId="new_road";

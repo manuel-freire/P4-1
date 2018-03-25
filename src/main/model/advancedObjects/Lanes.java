@@ -6,15 +6,28 @@ import java.util.Comparator;
 import main.model.TrafficSimulator;
 import main.model.simulatedObjects.Road;
 import main.model.simulatedObjects.Vehicle;
-
+/**
+ * Road with multiple lanes. Extends Road.
+ * @author Borja Lozano
+ */
 public class Lanes extends Road{
 	private int lanes;
+	/**
+	 * Class constructor.
+	 * @param id        identification
+	 * @param src       source junction
+	 * @param dest      destination junction
+	 * @param max_speed maximum speed
+	 * @param length    length of the road
+	 * @param lanes     number of lanes
+	 */
 	public Lanes(String id, String src, String dest, int max_speed, int length, int lanes) {
 		super(id, src, dest, max_speed, length);
 		this.lanes = lanes;
 	}
 	/**
 	 * Updates the velocity of every vehicle in it and calls their advance method.
+	 * @param sim simulation
 	 */
 	public void advance(TrafficSimulator sim) {
 		int reduction_factor = 0;

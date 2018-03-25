@@ -6,7 +6,10 @@ import java.util.Comparator;
 
 import main.model.TrafficSimulator;
 import main.model.simulatedObjects.Vehicle;
-
+/**
+ * Road class.
+ * @author Borja Lozano
+ */
 public class Road {
 	protected ArrayList<Vehicle> listVehicles = new ArrayList<>();
 	private int length, max_speed;
@@ -15,6 +18,11 @@ public class Road {
 
 	/**
 	 * Class constructor.
+	 * @param id identification
+	 * @param src source junction
+	 * @param dest destination junction
+	 * @param max_speed maximum speed
+	 * @param length length
 	 */
 	public Road(String id, String src, String dest, int max_speed, int length) {
 		this.id = id;
@@ -27,7 +35,7 @@ public class Road {
 	/**
 	 * Returns the junction at the end of the road.
 	 * 
-	 * @return
+	 * @return end junction
 	 */
 	public String getEndJunction() {
 		return dest;
@@ -72,6 +80,7 @@ public class Road {
 
 	/**
 	 * Updates the velocity of every vehicle in it and calls their advance method.
+	 * @param sim simulation
 	 */
 	public void advance(TrafficSimulator sim) {
 		int reduction_factor = 1;
