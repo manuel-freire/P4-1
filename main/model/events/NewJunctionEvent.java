@@ -2,7 +2,7 @@ package main.model.events;
 
 import java.util.NoSuchElementException;
 
-import main.ini.*;
+import es.ucm.fdi.ini.IniSection;
 import main.model.TrafficSimulator;
 import main.model.advancedObjects.MostCrowded;
 import main.model.advancedObjects.RoundRobin;

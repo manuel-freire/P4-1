@@ -1,11 +1,14 @@
 package main.model.events;
 
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import main.ini.IniSection;
+import es.ucm.fdi.ini.IniSection;
 import main.model.TrafficSimulator;
+
 public class BrokenVehicleEvent extends Event{
 	private int duration, time;
 	private List<String> vehicles;

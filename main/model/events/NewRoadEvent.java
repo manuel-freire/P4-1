@@ -1,8 +1,10 @@
 package main.model.events;
 
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.util.NoSuchElementException;
 
-import main.ini.*;
+import es.ucm.fdi.ini.IniSection;
 import main.model.TrafficSimulator;
 import main.model.advancedObjects.Dirt;
 import main.model.advancedObjects.Lanes;

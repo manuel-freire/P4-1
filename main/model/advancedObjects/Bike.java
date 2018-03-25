@@ -1,7 +1,9 @@
 package main.model.advancedObjects;
 
-import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
+import main.model.simulatedObjects.Road;
 import main.model.simulatedObjects.Vehicle;
 
 public class Bike extends Vehicle {	
@@ -12,7 +14,7 @@ public class Bike extends Vehicle {
 	 * @param max_speed          maximum speed of the vehicle
 	 * @param max_fault_duration maximum time that the vehicle can be out of order
 	 */
-	public Bike(ArrayList<String> itinerary, String id, int max_speed) {
+	public Bike(List<String> itinerary, String id, int max_speed) {
 		super(max_speed,itinerary,id);
 	}
 	/**
