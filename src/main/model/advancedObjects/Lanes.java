@@ -26,17 +26,17 @@ public class Lanes extends Road{
 			reduction_factor = 1;
 		else
 			reduction_factor = 2;
-		Collections.sort(listVehicles, new Comparator<Vehicle>() {
-			public int compare(Vehicle v2, Vehicle v1) {
-				return new Integer(v1.getLocation()).compareTo(v2.getLocation());
-			}
-		});
 		double base_speed = Math.min(getMaxSpeed(), getMaxSpeed()*lanes/Math.max(getListVehicles().size(), 1)+1);
 		for(Vehicle v : getListVehicles()) {
 			v.setActualVel((int)base_speed/reduction_factor);
 			v.advance(sim);
 			reduction_factor += (v.isOutOfOrder()) ? 1 : 0;
 		}
+		Collections.sort(listVehicles, new Comparator<Vehicle>() {
+			public int compare(Vehicle v2, Vehicle v1) {
+				return new Integer(v1.getLocation()).compareTo(v2.getLocation());
+			}
+		});
 	}
 	@Override
 	public String generateReport(int time) {

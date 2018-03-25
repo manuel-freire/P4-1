@@ -16,11 +16,6 @@ public class Dirt extends Road{
 	 * Updates the velocity of every vehicle in it and calls their advance method.
 	 */
 	public void advance(TrafficSimulator sim) {
-		Collections.sort(listVehicles, new Comparator<Vehicle>() {
-			public int compare(Vehicle v2, Vehicle v1) {
-				return new Integer(v1.getLocation()).compareTo(v2.getLocation());
-			}
-		});
 		int reduction_factor = 1;
 		for(Vehicle v : getListVehicles()) 
 			if(v.isOutOfOrder())
@@ -31,6 +26,11 @@ public class Dirt extends Road{
 			v.advance(sim);
 			reduction_factor += (v.isOutOfOrder()) ? 1 : 0;
 		}
+		Collections.sort(listVehicles, new Comparator<Vehicle>() {
+			public int compare(Vehicle v2, Vehicle v1) {
+				return new Integer(v1.getLocation()).compareTo(v2.getLocation());
+			}
+		});
 	}
 	@Override
 	public String generateReport(int time) {

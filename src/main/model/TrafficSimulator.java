@@ -38,8 +38,8 @@ public class TrafficSimulator {
 						events.remove(i);
 						i--;
 					} catch(Exception ex) {
-						System.out.println(ex.getMessage());
 						ex.printStackTrace();
+						System.exit(1);
 					}
 				}
 			} 
@@ -56,7 +56,7 @@ public class TrafficSimulator {
 				for(Vehicle v : vehicles)
 					ostream.write((v.generateReport(actualTick)+'\n').getBytes());
 			}catch(IOException e) {
-				System.out.println(e.getMessage());
+				e.printStackTrace();
 			}
 		} 
 	}
@@ -88,7 +88,7 @@ public class TrafficSimulator {
 			if(j.getID().equals(id))
 				jun = j;
 		if(jun == null)
-			throw new NoSuchElementException("The junction does not exist.");
+			throw new NoSuchElementException("The junction: " + id + "could't be found.");
 		else
 			return jun;
 	}
@@ -112,7 +112,7 @@ public class TrafficSimulator {
 				found = true;
 			}
 		if(found == false)
-			throw new NoSuchElementException("No junction matches the destination of the road.");
+			throw new NoSuchElementException("No junction matches the destination of the road: " + r.getID() + ".");
 				
 	}
 	/**
@@ -130,7 +130,7 @@ public class TrafficSimulator {
 				break;
 			}
 		if(found == false)
-			throw new NoSuchElementException("No road matches the vehicle start.");
+			throw new NoSuchElementException("No road matches the first junctions of the itinerary of the vehicle: " + v.getID() + ".");
 	}
 	/**
 	 * Add a junction to the simulation

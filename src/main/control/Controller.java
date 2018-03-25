@@ -3,6 +3,7 @@ package main.control;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 
 import main.model.TrafficSimulator;
 import main.model.events.Event;
@@ -35,7 +36,16 @@ public class Controller {
 			this.simulator.execute(ostream);
 		}catch(FileNotFoundException e) {
 			System.out.println(e.getMessage());
-			System.out.println("Couldnt find the output file.");
+			e.printStackTrace();
+			System.exit(1);
+		}catch(NumberFormatException e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+			System.exit(1);
+		}catch(NoSuchElementException e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+			System.exit(1);
 		}
 	}
 }
