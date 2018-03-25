@@ -7,7 +7,7 @@ import main.model.simulatedObjects.Junction;
 import main.model.simulatedObjects.Vehicle;
 
 public class RoundRobin extends Junction {
-	private int max_time_slice, min_time_slice, last, last_green;
+	private int max_time_slice, min_time_slice, last;
 	private int interval, time_spent, passed;
 
 	public RoundRobin(String id, int max_time_slice, int min_time_slice) {

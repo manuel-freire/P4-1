@@ -1,9 +1,7 @@
 package main.model.events;
 
-import java.io.BufferedReader;
-
-import es.ucm.fdi.ini.IniSection;
 import main.model.TrafficSimulator;
+import main.ini.*;
 
 public abstract class Event {
 	public abstract Event parser(String id);

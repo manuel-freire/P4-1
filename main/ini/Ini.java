@@ -1,5 +1,5 @@
 package main.ini;
- 
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -193,6 +193,8 @@ public class Ini {
 		for (IniSection sec : _iniSections) {
 			s += sec + System.lineSeparator();
 		}
+		System.out.println("PRUEBA");
+		System.out.println(_iniSections.get(0));
 		return s;
 	}
 }
