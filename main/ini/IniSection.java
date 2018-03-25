@@ -26,7 +26,6 @@ public class IniSection {
 	 * another list of keys in the order in which they where added. This is
 	 * mainly used when writing the INI structure.
 	 */
-	
 	private List<String> _keys;
 
 	/**

@@ -1,6 +1,7 @@
 package main.model.simulatedObjects;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import main.model.TrafficSimulator;
 

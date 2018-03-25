@@ -7,14 +7,17 @@ import main.model.simulatedObjects.Junction;
 import main.model.simulatedObjects.Vehicle;
 
 public class MostCrowded extends Junction{
-	private int interval, time_spent;
+	private int interval, time_spent, last_green;
 	private int last;
 	public MostCrowded(String id) {
 		super(id);
 		this.time_spent = -1;
 		this.green = -1;
 	}
-	
+	/**
+	 * Makes the junction advance, by advancing their queues if its
+	 * possible
+	 */
 	public void advance(TrafficSimulator sim) {
 		if(roads.isEmpty())
 			return;
@@ -47,7 +50,6 @@ public class MostCrowded extends Junction{
 	}
 	/**
 	 * Generates a report of the status of the road.
-	 * 
 	 * @param time current time of the simulation.
 	 */
 	public String generateReport(int time) {

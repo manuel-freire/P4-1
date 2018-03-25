@@ -1,13 +1,15 @@
 package main.model.events;
+import java.io.BufferedReader;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
+import es.ucm.fdi.ini.IniSection;
 import main.model.TrafficSimulator;
 import main.model.advancedObjects.Bike;
 import main.model.advancedObjects.Car;
 import main.model.simulatedObjects.Vehicle;
-import main.ini.*;
 
 public class NewVehicleEvent extends Event{
 	private String id, type;

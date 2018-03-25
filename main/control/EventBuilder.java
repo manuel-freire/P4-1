@@ -2,9 +2,12 @@ package main.control;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import main.ini.*;
+import es.ucm.fdi.ini.Ini;
+import es.ucm.fdi.ini.IniSection;
 import main.model.events.*;
 
 public class EventBuilder {
@@ -15,12 +18,12 @@ public class EventBuilder {
 	 * Class constructor
 	 * @param filename path to the input file
 	 */
-	public EventBuilder(String filename) {
+	public EventBuilder(String filename) throws IOException {
 		this.fileName=filename;
 		try {
 			this.ini = new Ini(filename);
 		} catch (IOException e) {
-			e.printStackTrace();
+			throw e;
 		}
 		
 	}
