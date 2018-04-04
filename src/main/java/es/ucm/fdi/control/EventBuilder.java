@@ -1,11 +1,11 @@
-package main.control;
+package es.ucm.fdi.control;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import main.ini.*;
-import main.model.events.*;
+import es.ucm.fdi.ini.*;
+import es.ucm.fdi.model.events.*;
 
 /**
  * Builds the event list.

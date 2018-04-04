@@ -1,4 +1,4 @@
-package main.model;
+package es.ucm.fdi.model;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import main.model.events.Event;
-import main.model.simulatedObjects.*;
+import es.ucm.fdi.model.events.Event;
+import es.ucm.fdi.model.simulatedObjects.*;
 /**
  * Class that sets up the simulator and runs it. Stores the list of events and executes them.
  * @author Borja Lozano

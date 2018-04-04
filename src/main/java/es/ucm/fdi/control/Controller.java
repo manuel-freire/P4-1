@@ -1,12 +1,12 @@
-package main.control;
+package es.ucm.fdi.control;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
-import main.model.TrafficSimulator;
-import main.model.events.Event;
+import es.ucm.fdi.model.TrafficSimulator;
+import es.ucm.fdi.model.events.Event;
 
 /**
  * Controller of the simulator. Reads the events and runs the simulation.

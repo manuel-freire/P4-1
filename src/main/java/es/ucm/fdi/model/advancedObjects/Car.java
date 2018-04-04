@@ -1,9 +1,9 @@
-package main.model.advancedObjects;
+package es.ucm.fdi.model.advancedObjects;
 
 import java.util.ArrayList;
 import java.util.Random;
-import main.model.TrafficSimulator;
-import main.model.simulatedObjects.Vehicle;
+import es.ucm.fdi.model.TrafficSimulator;
+import es.ucm.fdi.model.simulatedObjects.Vehicle;
 /**
  * Car class. Extends Vehicle.
  * @author Borja Lozano
@@ -42,7 +42,7 @@ public class Car extends Vehicle {
 	 * @param sim simulation
 	 */
 	public void advance(TrafficSimulator sim) {
-		if (brokenTime <= 0 && since_fault >= resistance && rand.nextDouble() < faulty_probability) {
+		if (brokenTime <= 0 && since_fault > resistance && rand.nextDouble() < faulty_probability) {
 			setFaultTime(rand.nextInt(max_fault_duration) + 1);
 			setActualVel(0);
 		}
@@ -76,8 +76,13 @@ public class Car extends Vehicle {
 	@Override
 	public String generateReport(int time) {
 		String loc = isArrived() ? "arrived" : "(" + getActualRoad().getID() + "," + getLocation() + ")";
-		return "[vehicle_report]\nid = " + getId() + "\ntime = " + time + "\ntype = car\nspeed = " + this.getActualVel()
-				+ "\nkilometrage = " + getKilometrage() + "\nfaulty = " + getBrokenTime() + "\nlocation = " + loc
-				+ "\n";
+		return "[vehicle_report]\n" +
+				"id = " + getId() + "\n" +
+				"time = " + time + "\n" +
+				"type = car\n" +
+				"speed = " + this.getActualVel() + "\n" +
+				"kilometrage = " + getKilometrage() + "\n" +
+				"faulty = " + getBrokenTime() + "\n" +
+				"location = " + loc + "\n";
 	}
 }

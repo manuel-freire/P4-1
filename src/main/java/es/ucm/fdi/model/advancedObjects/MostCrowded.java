@@ -1,10 +1,10 @@
-package main.model.advancedObjects;
+package es.ucm.fdi.model.advancedObjects;
 
 import java.util.ArrayList;
 
-import main.model.TrafficSimulator;
-import main.model.simulatedObjects.Junction;
-import main.model.simulatedObjects.Vehicle;
+import es.ucm.fdi.model.TrafficSimulator;
+import es.ucm.fdi.model.simulatedObjects.Junction;
+import es.ucm.fdi.model.simulatedObjects.Vehicle;
 /**
  * Crowded junction class. Extends Junction.
  * @author Borja Lozano

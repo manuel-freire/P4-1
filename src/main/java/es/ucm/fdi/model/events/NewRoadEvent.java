@@ -1,12 +1,12 @@
-package main.model.events;
+package es.ucm.fdi.model.events;
 
 import java.util.NoSuchElementException;
 
-import main.ini.*;
-import main.model.TrafficSimulator;
-import main.model.advancedObjects.Dirt;
-import main.model.advancedObjects.Lanes;
-import main.model.simulatedObjects.Road;
+import es.ucm.fdi.ini.*;
+import es.ucm.fdi.model.TrafficSimulator;
+import es.ucm.fdi.model.advancedObjects.Dirt;
+import es.ucm.fdi.model.advancedObjects.Lanes;
+import es.ucm.fdi.model.simulatedObjects.Road;
 /**
  * Class of the event that creates a new road.
  * @author Javier Navalon

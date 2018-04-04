@@ -1,11 +1,11 @@
-package main.model.events;
+package es.ucm.fdi.model.events;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import main.ini.IniSection;
-import main.model.TrafficSimulator;
+import es.ucm.fdi.ini.IniSection;
+import es.ucm.fdi.model.TrafficSimulator;
 /**
  * Class of the event that breaks vehicles.
  * @author Javier Navalon

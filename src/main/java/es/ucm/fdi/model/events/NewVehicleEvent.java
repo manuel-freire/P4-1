@@ -1,13 +1,13 @@
-package main.model.events;
+package es.ucm.fdi.model.events;
 
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
-import main.model.TrafficSimulator;
-import main.model.advancedObjects.Bike;
-import main.model.advancedObjects.Car;
-import main.model.simulatedObjects.Vehicle;
-import main.ini.*;
+import es.ucm.fdi.model.TrafficSimulator;
+import es.ucm.fdi.model.advancedObjects.Bike;
+import es.ucm.fdi.model.advancedObjects.Car;
+import es.ucm.fdi.model.simulatedObjects.Vehicle;
+import es.ucm.fdi.ini.*;
 /**
  * Class of the event that creates a new vehicle.
  * @author Javier Navalon

@@ -1,12 +1,12 @@
-package main.model.events;
+package es.ucm.fdi.model.events;
 
 import java.util.NoSuchElementException;
 
-import main.ini.*;
-import main.model.TrafficSimulator;
-import main.model.advancedObjects.MostCrowded;
-import main.model.advancedObjects.RoundRobin;
-import main.model.simulatedObjects.Junction;
+import es.ucm.fdi.ini.*;
+import es.ucm.fdi.model.TrafficSimulator;
+import es.ucm.fdi.model.advancedObjects.MostCrowded;
+import es.ucm.fdi.model.advancedObjects.RoundRobin;
+import es.ucm.fdi.model.simulatedObjects.Junction;
 /**
  * Class of the event that creates a new junction.
  * @author Javier Navalon

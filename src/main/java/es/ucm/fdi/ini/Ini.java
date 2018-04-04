@@ -1,4 +1,4 @@
-package main.ini;
+package es.ucm.fdi.ini;
 
 import java.io.BufferedReader;
 import java.io.File;

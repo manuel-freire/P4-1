@@ -1,7 +1,7 @@
-package main.model.events;
+package es.ucm.fdi.model.events;
 
-import main.model.TrafficSimulator;
-import main.ini.*;
+import es.ucm.fdi.model.TrafficSimulator;
+import es.ucm.fdi.ini.*;
 /**
  * Abstract class of an event.
  * @author Javier Navalon

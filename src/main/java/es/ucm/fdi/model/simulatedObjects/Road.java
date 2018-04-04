@@ -1,11 +1,11 @@
-package main.model.simulatedObjects;
+package es.ucm.fdi.model.simulatedObjects;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-import main.model.TrafficSimulator;
-import main.model.simulatedObjects.Vehicle;
+import es.ucm.fdi.model.TrafficSimulator;
+import es.ucm.fdi.model.simulatedObjects.Vehicle;
 /**
  * Road class.
  * @author Borja Lozano

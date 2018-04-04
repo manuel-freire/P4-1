@@ -1,8 +1,8 @@
-package main.model.simulatedObjects;
+package es.ucm.fdi.model.simulatedObjects;
 
 import java.util.ArrayList;
 
-import main.model.TrafficSimulator;
+import es.ucm.fdi.model.TrafficSimulator;
 /**
  * Junction class.
  * @author Borja Lozano

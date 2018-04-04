@@ -1,11 +1,11 @@
-package main.model.advancedObjects;
+package es.ucm.fdi.model.advancedObjects;
 
 import java.util.Collections;
 import java.util.Comparator;
 
-import main.model.TrafficSimulator;
-import main.model.simulatedObjects.Road;
-import main.model.simulatedObjects.Vehicle;
+import es.ucm.fdi.model.TrafficSimulator;
+import es.ucm.fdi.model.simulatedObjects.Road;
+import es.ucm.fdi.model.simulatedObjects.Vehicle;
 /**
  * Road with multiple lanes. Extends Road.
  * @author Borja Lozano

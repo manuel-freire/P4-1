@@ -1,4 +1,4 @@
-package main;
+package es.ucm.fdi;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -13,8 +13,8 @@ import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
-import main.ini.*;
-import main.control.*;
+import es.ucm.fdi.ini.*;
+import es.ucm.fdi.control.*;
 
 /**
  * IniError class.
@@ -202,7 +202,7 @@ public class Main {
 		try {
 			test("/src/resources/examples/basic");
 			test("/src/resources/examples/advanced");
-			test("/src/resources/examples/err");
+			//test("/src/resources/examples/err"); When the events are incorrect prints the stacktrace and exits the program
 			start(args);
 		} catch(IOException e) {
 			System.out.println(e.getMessage());

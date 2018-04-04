@@ -1,8 +1,8 @@
-package main.model.advancedObjects;
+package es.ucm.fdi.model.advancedObjects;
 
 import java.util.ArrayList;
 
-import main.model.simulatedObjects.Vehicle;
+import es.ucm.fdi.model.simulatedObjects.Vehicle;
 /**
  * Bike class. Extends Vehicle.
  * @author Borja Lozano
